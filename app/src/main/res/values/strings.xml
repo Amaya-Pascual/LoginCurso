@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LoginCurso</string>
+    <string name="password">Introduce contraseña</string>
+    <string name="usuario">Introduce usuario</string>
+    <string name="login">Login</string>
+    <string name="welcome">Bienvenido a la aplicación</string>
+</resources>
