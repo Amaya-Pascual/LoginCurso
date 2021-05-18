@@ -10,7 +10,7 @@ public class Splash extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, PresentacionActivity.class);
         startActivity(intent);
         finish(); // evitar regresar a esta activity
     }

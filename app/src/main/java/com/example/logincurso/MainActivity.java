@@ -3,7 +3,9 @@ package com.example.logincurso;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.VoiceInteractor;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -26,6 +28,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private EditText password, user;
     private Button btnlogin;
+    String usuario, passw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,39 +38,38 @@ public class MainActivity extends AppCompatActivity {
         user=findViewById(R.id.user);
         btnlogin=findViewById(R.id.buttonLogin);
 
+        recuperarPreferencias();
+
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validarUsuario("http://194.30.35.183/subasta/validarUsuario.php");
+                //no permite campos vacíos
+                usuario = user.getText().toString();
+                passw = password.getText().toString();
+                //errores
+                boolean hasErrors = false;
+                String error="";
+                if (usuario.isEmpty() && passw.isEmpty()){
+                    hasErrors = true;
+                    error+="\nNo se permiten campos vacíos";
+                }
+                if (!Patterns.EMAIL_ADDRESS.matcher(user.getText()).matches()){
+                    hasErrors = true;
+                    error+="\nMail con @.";
+                }
+               if (password.length()<2)
+                 {
+                    hasErrors = true;
+                    error+="\nLa contraseña debe tener al menos 2 caracteres";
+                 }
+                if (!hasErrors){
+                    validarUsuario("http://194.30.35.183/subasta/validarUsuario.php");
+                }
+                  else{
+                    Toast.makeText(MainActivity.this, error, Toast.LENGTH_LONG).show();
+             }
             }
         });
-
-
-    //al clicar el boton del login vaoms a la siguiente actividad
-        //btnlogin.setOnClickListener(new View.OnClickListener() {
-        //    public void onClick(View v)
-        //    {
-        //       boolean hasErrors = false;
-        //       String error="";
-        //       if (password.length()<6)
-        //       {
-         //          hasErrors = true;
-        //           error+="La contraseña debe tener al menos 6 caracteres";
-         //      }
-         //      if (!Patterns.EMAIL_ADDRESS.matcher(user.getText()).matches()){
-        //           hasErrors = true;
-        //           error+="\nEl formato del mail de usuario es incorrecto";
-         //      }
-         //      if (!hasErrors){
-        //           Intent i = new Intent(MainActivity.this, LoggedActivity.class);
-         //          startActivity(i);
-         //      }
-        //       else{
-        //           Toast.makeText(MainActivity.this, error, Toast.LENGTH_LONG).show();
-         //      }
-
-         //   }
-       // });
     }
 
     private void validarUsuario (String URL){
@@ -75,10 +77,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()){
+                    guardarPreferencias();
                     Intent i = new Intent(getApplicationContext(), LoggedActivity.class);
                     startActivity(i);
+                    finish();
                 }else{
-                    Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Contraseña o usuario incorrectos", Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -90,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parametros = new HashMap<String, String>();
-                parametros.put("mail", user.toString());
-                parametros.put("contrasena", password.toString());
+                parametros.put("mail", usuario);
+                parametros.put("contrasena", passw);
                 return parametros;
 
             }
@@ -99,6 +103,24 @@ public class MainActivity extends AppCompatActivity {
 
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
+    }
+
+    //preferencias
+    private void guardarPreferencias(){
+        SharedPreferences preferences=getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("mail",usuario);
+        editor.putString("contrasena", passw);
+        editor.putBoolean("sesion", true);
+        editor.commit();
+    }
+
+    //recuperar preferencias
+    private void recuperarPreferencias(){
+        SharedPreferences preferences=getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
+        user.setText(preferences.getString("mail", "correo@dom.es"));
+        password.setText(preferences.getString("contrasena", "1234"));
+
     }
 
 }

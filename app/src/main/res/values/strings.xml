@@ -3,5 +3,13 @@
     <string name="password">Introduce contraseña</string>
     <string name="usuario">Introduce usuario</string>
     <string name="login">Login</string>
-    <string name="welcome">Bienvenido a la aplicación</string>
+    <string name="welcome">Bienvenido a Numismática Lavín</string>
+    <string name="cerrarSesion">Cerrar Sesion</string>
+
+    <string name="registrar">Registro</string>
+    <string name="regContrasena">Contraseña</string>
+    <string name="regNombre">Nombre</string>
+    <string name="btnRegistro">Registrar</string>
+    <string name="regMail">Mail de usuario</string>
+    <string name="regApellido">Apellido</string>
 </resources>

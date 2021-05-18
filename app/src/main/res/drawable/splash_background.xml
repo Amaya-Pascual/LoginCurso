@@ -4,6 +4,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/calendario2016" /> <!-- imagen centrada -->
+            android:src="@drawable/logowordpress" /> <!-- imagen centrada -->
     </item>
 </layer-list>
