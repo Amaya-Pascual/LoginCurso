@@ -17,6 +17,11 @@
 
     <EditText
         android:id="@+id/user"
+        android:backgroundTint="@android:color/darker_gray"
+        android:drawableLeft="@drawable/icon_email"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="350dp"
@@ -30,6 +35,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/user"
         android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:drawableLeft="@drawable/icon_lock"
+        android:ems="10"
         android:hint="@string/password"
         android:layout_centerHorizontal="true"
         android:inputType="textPassword" />
