@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginCurso"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Registro"></activity>
-        <!-- segunda -->
+        <activity android:name=".Catalogo"></activity>
+        <activity android:name=".Registro" /> <!-- segunda -->
         <activity android:name=".PresentacionActivity" /> <!-- la tercera -->
         <activity android:name=".MainActivity" /> <!-- una vez logueado -->
         <activity android:name=".LoggedActivity" /> <!-- primera -->

@@ -13,4 +13,6 @@
     <string name="regMail">Mail de usuario</string>
     <string name="regApellido">Apellido</string>
     <string name="logoTransparente">Logo Transparente</string>
+    <string name="tarjeta_1">Texto ejemplo</string>
+    <string name="tarjeta_2">TarjetaLote</string>
 </resources>

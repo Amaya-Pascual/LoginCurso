@@ -2,6 +2,7 @@ package com.example.logincurso;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,7 +22,7 @@ import java.util.Map;
 
 public class Registro extends AppCompatActivity {
 
-    String URL_SERVIDOR = "http://194.30.35.183/subasta/registrarUsuario.php"; //pendiente de hacer
+    String URL_SERVIDOR = "http://194.30.35.183/subasta/registrarUsuario.php";
 
     EditText etUsuario, etContrasena, etNombre, etApellido;
     Button btnRegistrar;
@@ -50,19 +51,16 @@ public class Registro extends AppCompatActivity {
         StringRequest stringRequest;
         stringRequest = new StringRequest(Request.Method.POST, URL_SERVIDOR,
                 new Response.Listener<String>() {
-
                     @Override
                     public void onResponse(String response) {
-                        // En este apartado se programa lo que deseamos hacer en caso de no haber errores
-                        //registrar usuario???
-
+                    //mensajes en el php
                         if(response.equals("ERROR 1")) {
                             Toast.makeText(Registro.this, "Se deben de llenar todos los campos.", Toast.LENGTH_SHORT).show();
                         } else if(response.equals("ERROR 2")) {
                             Toast.makeText(Registro.this, "Fallo el registro.", Toast.LENGTH_SHORT).show();
                         } else if(response.equals("MENSAJE")) {
                             Toast.makeText(Registro.this, "Registrado correctamente.", Toast.LENGTH_LONG).show();
-                            finish();
+
                         }
 
                     }
@@ -82,7 +80,6 @@ public class Registro extends AppCompatActivity {
                 parametros.put("contrasena", etContrasena.getText().toString().trim());
                 parametros.put("nomCliente", etNombre.getText().toString().trim());
                 parametros.put("ape1Cliente", etNombre.getText().toString().trim());
-
                 return parametros;
             }
         };
