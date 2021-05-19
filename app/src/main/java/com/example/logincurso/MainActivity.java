@@ -28,6 +28,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private EditText password, user;
     private Button btnlogin;
+    private Button btnRegistro;
     String usuario, passw;
 
     @Override
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         password=findViewById(R.id.password);
         user=findViewById(R.id.user);
         btnlogin=findViewById(R.id.buttonLogin);
+        btnRegistro=findViewById(R.id.buttonRegistrar);
 
         recuperarPreferencias();
 
@@ -68,6 +70,15 @@ public class MainActivity extends AppCompatActivity {
                   else{
                     Toast.makeText(MainActivity.this, error, Toast.LENGTH_LONG).show();
              }
+            }
+        });
+        //boton para llevarnos a la pantalla de registro
+        btnRegistro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Registro.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -120,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences preferences=getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
         user.setText(preferences.getString("mail", "correo@dom.es"));
         password.setText(preferences.getString("contrasena", "1234"));
-
     }
 
 }

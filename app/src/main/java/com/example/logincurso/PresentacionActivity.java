@@ -7,8 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.ProgressBar;
+
 
 public class PresentacionActivity extends AppCompatActivity {
 
@@ -23,6 +22,7 @@ public class PresentacionActivity extends AppCompatActivity {
                 SharedPreferences preferences=getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
                 //comprueba si en las preferencias hay una sesion creada, y si es true va a la aplicacion
                 boolean sesion = preferences.getBoolean("sesion", false);
+                //recordar que si hemos cerrado sesion las preferencias se han borrado
                 if (sesion){
                     //si hay sesion entra
                     Intent intent = new Intent(getApplicationContext(), LoggedActivity.class);

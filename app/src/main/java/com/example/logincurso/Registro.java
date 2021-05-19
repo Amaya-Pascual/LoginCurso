@@ -61,7 +61,7 @@ public class Registro extends AppCompatActivity {
                         } else if(response.equals("ERROR 2")) {
                             Toast.makeText(Registro.this, "Fallo el registro.", Toast.LENGTH_SHORT).show();
                         } else if(response.equals("MENSAJE")) {
-                            Toast.makeText(Registro.this, "Registro exitoso.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Registro.this, "Registrado correctamente.", Toast.LENGTH_LONG).show();
                             finish();
                         }
 
