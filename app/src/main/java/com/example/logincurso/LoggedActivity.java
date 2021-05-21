@@ -38,7 +38,6 @@ public class LoggedActivity extends AppCompatActivity {
                 Toast.makeText(LoggedActivity.this, "Dónde estamos", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), UbicacionTiendaMap.class);
                 startActivity(intent);
-                finish();
                 return false;
             }
         });
