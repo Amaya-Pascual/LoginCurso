@@ -33,8 +33,7 @@ public class UbicacionTiendaMap extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        // Add a marker in my address and move the camera
         LatLng tiendaBilbao = new LatLng(43.25902040, -2.92709590);
         mMap.addMarker(new MarkerOptions().position(tiendaBilbao).title("Numismática Lavín - Bailén, 5 - Bilbao - España"));
         //zoom maximo y minimo preferido

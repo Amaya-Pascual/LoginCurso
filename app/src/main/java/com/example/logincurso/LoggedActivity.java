@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 public class LoggedActivity extends AppCompatActivity {
     Button btnCerrar, btnLlamar; //boton de tipo cerrarSesion
     TextView bienvenida;
@@ -31,6 +34,36 @@ public class LoggedActivity extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
         String dato = preferences.getString("mail", "usuario");
         bienvenida.setText("Usuario registrado: " + dato);
+        FloatingActionButton fab;
+        fab=findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Enviar un mail", Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                String uriText =
+                                        "mailto:lavin@numismaticalavin.com" +
+                                                "?subject=" + Uri.encode("Asunto...") +
+                                                "&body=" + Uri.encode("Cuerpo del mensaje...");
+
+                                Uri uri = Uri.parse(uriText);
+
+                                Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
+                                sendIntent.setData(uri);
+
+                                try {
+                                    startActivity(Intent.createChooser(sendIntent, getString(R.string.enviarMail)));
+                                } catch (ActivityNotFoundException e)
+                                {
+                                    Toast.makeText(LoggedActivity.this, R.string.errorMail, Toast.LENGTH_LONG).show();
+                                }
+                            }
+                        }).show();
+            }
+        });
 
         imagenLavin.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

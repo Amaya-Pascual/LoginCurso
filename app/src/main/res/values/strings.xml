@@ -18,4 +18,6 @@
     <string name="btnVolverLogin">Volver al Login</string>
     <string name="btnLLamar">Llamar por teléfono</string>
     <string name="title_activity_ubicacion_tienda_map">Map</string>
+    <string name="errorMail">Error al enviar el mail</string>
+    <string name="enviarMail">Enviar mail</string>
 </resources>

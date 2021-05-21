@@ -34,7 +34,7 @@
         <activity
             android:name=".UbicacionTiendaMap"
             android:label="@string/title_activity_ubicacion_tienda_map"></activity>
-        <activity android:name=".Catalogo" />
+
         <activity android:name=".Registro" /> <!-- segunda -->
         <activity android:name=".PresentacionActivity" /> <!-- la tercera -->
         <activity android:name=".MainActivity" /> <!-- una vez logueado -->
