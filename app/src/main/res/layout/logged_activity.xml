@@ -9,6 +9,7 @@
 
     <ImageView
         android:id="@+id/imageView2"
+        android:clickable="true"
         android:layout_width="234dp"
         android:layout_height="321dp"
         android:layout_centerInParent="true"

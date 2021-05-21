@@ -17,4 +17,5 @@
     <string name="tarjeta_2">TarjetaLote</string>
     <string name="btnVolverLogin">Volver al Login</string>
     <string name="btnLLamar">Llamar por teléfono</string>
+    <string name="title_activity_ubicacion_tienda_map">Map</string>
 </resources>
