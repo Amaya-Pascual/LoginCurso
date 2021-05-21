@@ -25,7 +25,7 @@ public class Registro extends AppCompatActivity {
     String URL_SERVIDOR = "http://194.30.35.183/subasta/registrarUsuario.php";
 
     EditText etUsuario, etContrasena, etNombre, etApellido;
-    Button btnRegistrar;
+    Button btnRegistrar, btnVolverLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +37,23 @@ public class Registro extends AppCompatActivity {
         etNombre = findViewById(R.id.etNombre);
         etApellido = findViewById(R.id.etApellido);
         btnRegistrar = findViewById(R.id.btnRegistrar);
+        btnVolverLogin = findViewById(R.id.btnVolerLogin);
 
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registrar();
+                Intent intent = new Intent(getApplicationContext(), Registro.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        btnVolverLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -79,7 +91,7 @@ public class Registro extends AppCompatActivity {
                 parametros.put("mail", etUsuario.getText().toString().trim());
                 parametros.put("contrasena", etContrasena.getText().toString().trim());
                 parametros.put("nomCliente", etNombre.getText().toString().trim());
-                parametros.put("ape1Cliente", etNombre.getText().toString().trim());
+                parametros.put("ape1Cliente", etApellido.getText().toString().trim());
                 return parametros;
             }
         };
