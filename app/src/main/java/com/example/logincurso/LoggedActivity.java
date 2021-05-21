@@ -1,8 +1,10 @@
 package com.example.logincurso;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,13 +16,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LoggedActivity extends AppCompatActivity {
-    Button btnCerrar; //boton de tipo cerrarSesion
+    Button btnCerrar, btnLlamar; //boton de tipo cerrarSesion
     TextView bienvenida;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.logged_activity);
         btnCerrar = findViewById(R.id.cerrarSesion);
+        btnLlamar = findViewById(R.id.btnLlamar);
         bienvenida=findViewById(R.id.bienvenida);
         SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
         String dato = preferences.getString("mail", "usuario");
@@ -36,6 +39,19 @@ public class LoggedActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        btnLlamar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri number = Uri.parse("tel:5551234");
+                Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
+                try {
+                    startActivity(callIntent);
+                } catch (ActivityNotFoundException e)
+                {
+                    Toast.makeText(LoggedActivity.this, "Ha habido un error", Toast.LENGTH_LONG).show();
+                }
             }
         });
 

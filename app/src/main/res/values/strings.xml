@@ -16,4 +16,5 @@
     <string name="tarjeta_1">Texto ejemplo</string>
     <string name="tarjeta_2">TarjetaLote</string>
     <string name="btnVolverLogin">Volver al Login</string>
+    <string name="btnLLamar">Llamar por teléfono</string>
 </resources>
