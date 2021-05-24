@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.logincurso">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -9,6 +8,7 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginCurso"
         android:usesCleartextTraffic="true">
-
+        <activity android:name=".CatalogoReciclerView"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -33,8 +33,7 @@
 
         <activity
             android:name=".UbicacionTiendaMap"
-            android:label="@string/title_activity_ubicacion_tienda_map"></activity>
-
+            android:label="@string/title_activity_ubicacion_tienda_map" />
         <activity android:name=".Registro" /> <!-- segunda -->
         <activity android:name=".PresentacionActivity" /> <!-- la tercera -->
         <activity android:name=".MainActivity" /> <!-- una vez logueado -->

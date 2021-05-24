@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:clickable="true"
         android:layout_width="234dp"
-        android:layout_height="321dp"
+        android:layout_height="237dp"
         android:layout_centerHorizontal="true"
+        android:clickable="true"
         app:srcCompat="@drawable/logowordpress" />
 
     <TextView
@@ -24,35 +24,46 @@
         android:text="@string/welcome"
          />
 
-    <Button
-        android:id="@+id/cerrarSesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/bienvenida"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/cerrarSesion">
-
-    </Button>
 
     <Button
         android:id="@+id/btnLlamar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/bienvenida"
-        android:layout_marginTop="94dp"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:text="@string/btnLLamar">
 
     </Button>
+    <Button
+        android:id="@+id/btnCatalogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnLlamar"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/btnCatalogo">
+
+    </Button>
+
+    <Button
+        android:id="@+id/cerrarSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnCatalogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/cerrarSesion">
+    </Button>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnLlamar"
+        android:layout_below="@+id/cerrarSesion"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="89dp"
+        android:layout_marginTop="30dp"
         android:layout_marginBottom="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 

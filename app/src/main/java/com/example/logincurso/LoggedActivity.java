@@ -20,7 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 public class LoggedActivity extends AppCompatActivity {
-    Button btnCerrar, btnLlamar; //boton de tipo cerrarSesion
+    Button btnCerrar, btnLlamar, btnCatalogo; //boton de tipo cerrarSesion
     TextView bienvenida;
     ImageView imagenLavin;
     @Override
@@ -29,6 +29,7 @@ public class LoggedActivity extends AppCompatActivity {
         setContentView(R.layout.logged_activity);
         btnCerrar = findViewById(R.id.cerrarSesion);
         btnLlamar = findViewById(R.id.btnLlamar);
+        btnCatalogo = findViewById(R.id.btnCatalogo);
         bienvenida=findViewById(R.id.bienvenida);
         imagenLavin = findViewById(R.id.imageView2);
         SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
@@ -98,6 +99,14 @@ public class LoggedActivity extends AppCompatActivity {
                 {
                     Toast.makeText(LoggedActivity.this, "Ha habido un error", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+        btnCatalogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoggedActivity.this, "Catálogo de lotes", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), CatalogoReciclerView.class);
+                startActivity(intent);
             }
         });
 

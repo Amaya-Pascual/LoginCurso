@@ -20,4 +20,5 @@
     <string name="title_activity_ubicacion_tienda_map">Map</string>
     <string name="errorMail">Error al enviar el mail</string>
     <string name="enviarMail">Enviar mail</string>
+    <string name="btnCatalogo">Catálogo</string>
 </resources>
