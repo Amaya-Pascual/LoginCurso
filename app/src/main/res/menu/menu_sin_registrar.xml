@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/inicio"
+        android:icon="@drawable/icon_lock"
+        android:title="@string/menuPrincipal"/>
+    <item
+        android:id="@+id/registro"
+        android:icon="@drawable/icon_lock"
+        android:title="@string/registrotxt"/>
+
+</menu>

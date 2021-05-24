@@ -18,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginCurso"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CatalogoReciclerView"></activity>
+        <activity android:name=".ObtenerPerfil"></activity>
+        <activity android:name=".EditarPerfil" />
+        <activity android:name=".CatalogoReciclerView" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

@@ -2,7 +2,11 @@ package com.example.logincurso;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,7 +42,7 @@ public class UbicacionTiendaMap extends FragmentActivity implements OnMapReadyCa
         mMap.addMarker(new MarkerOptions().position(tiendaBilbao).title("Numismática Lavín - Bailén, 5 - Bilbao - España"));
         //zoom maximo y minimo preferido
         mMap.setMinZoomPreference(6.0f);
-        mMap.setMaxZoomPreference(14.0f);
+        mMap.setMaxZoomPreference(20.0f);
         mMap.moveCamera(CameraUpdateFactory.newLatLng(tiendaBilbao));
     }
 }

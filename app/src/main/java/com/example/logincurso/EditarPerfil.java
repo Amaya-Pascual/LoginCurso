@@ -2,13 +2,16 @@ package com.example.logincurso;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -22,16 +25,18 @@ import com.android.volley.toolbox.Volley;
 import java.util.Hashtable;
 import java.util.Map;
 
-public class Registro extends AppCompatActivity {
+public class EditarPerfil extends AppCompatActivity {
+    //conexion bd
+    String URL_SERVIDOR = "http://194.30.35.183/subasta/editarUsuario.php";
+    String URL_USUARIO= "http://194.30.35.183/subasta/obtenerUsuario.php";
 
-    String URL_SERVIDOR = "http://194.30.35.183/subasta/registrarUsuario.php";
-
-    EditText etUsuario, etContrasena, etNombre, etApellido;
-    Button btnRegistrar, btnVolverLogin;
+    EditText etContrasena, etNombre, etApellido;
+    Button btnEditar, btnVolverLogin;
+    TextView txtMail;
 
     //menu
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_sin_registrar, menu);
+        getMenuInflater().inflate(R.menu.menu1, menu);
         return true;
     }
 
@@ -55,24 +60,28 @@ public class Registro extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
-
-        etUsuario = findViewById(R.id.etUsuario);
+        setContentView(R.layout.activity_editar_perfil);
+        txtMail = findViewById(R.id.txtmail);
         etContrasena = findViewById(R.id.etContrasena);
         etNombre = findViewById(R.id.etNombre);
         etApellido = findViewById(R.id.etApellido);
-        btnRegistrar = findViewById(R.id.btnRegistrar);
+        btnEditar = findViewById(R.id.btnEditar);
         btnVolverLogin = findViewById(R.id.btnVolverLogin);
+        SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
+        String mail = preferences.getString("mail", "usuario");
+        //toma el mail de las preferencias
+        txtMail.setText(mail);
 
-        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+        btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registrar();
-                Intent intent = new Intent(getApplicationContext(), Registro.class);
+                editar();
+                Intent intent = new Intent(getApplicationContext(), EditarPerfil.class);
                 startActivity(intent);
                 finish();
             }
         });
+
         btnVolverLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,20 +92,19 @@ public class Registro extends AppCompatActivity {
         });
 
     }
-
-    public void registrar() {
+    private void editar() {
         StringRequest stringRequest;
         stringRequest = new StringRequest(Request.Method.POST, URL_SERVIDOR,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                    //mensajes en el php
+                        //mensajes en el php
                         if(response.equals("ERROR 1")) {
-                            Toast.makeText(Registro.this, "Se deben de llenar todos los campos.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditarPerfil.this, "Se deben de llenar todos los campos.", Toast.LENGTH_SHORT).show();
                         } else if(response.equals("ERROR 2")) {
-                            Toast.makeText(Registro.this, "Fallo el registro.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditarPerfil.this, "Fallo en la edicion.", Toast.LENGTH_SHORT).show();
                         } else if(response.equals("MENSAJE")) {
-                            Toast.makeText(Registro.this, "Registrado correctamente.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(EditarPerfil.this, "Editado correctamente.", Toast.LENGTH_LONG).show();
 
                         }
 
@@ -105,15 +113,14 @@ public class Registro extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // En caso de tener algun error en la obtencion de los datos
-                Toast.makeText(Registro.this, "ERROR CON LA CONEXION", Toast.LENGTH_LONG).show();
+                Toast.makeText(EditarPerfil.this, "ERROR CON LA CONEXION", Toast.LENGTH_LONG).show();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-
                 // En este metodo se hace el envio de valores de la aplicacion al servidor
                 Map<String, String> parametros = new Hashtable<String, String>();
-                parametros.put("mail", etUsuario.getText().toString().trim());
+                parametros.put("mail", txtMail.getText().toString().trim());
                 parametros.put("contrasena", etContrasena.getText().toString().trim());
                 parametros.put("nomCliente", etNombre.getText().toString().trim());
                 parametros.put("ape1Cliente", etApellido.getText().toString().trim());
@@ -121,7 +128,8 @@ public class Registro extends AppCompatActivity {
             }
         };
 
-        RequestQueue requestQueue = Volley.newRequestQueue(Registro.this);
+        RequestQueue requestQueue = Volley.newRequestQueue(EditarPerfil.this);
         requestQueue.add(stringRequest);
     }
-}
+    }
+
