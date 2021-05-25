@@ -22,13 +22,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
 
 public class EditarPerfil extends AppCompatActivity {
     //conexion bd
     String URL_SERVIDOR = "http://194.30.35.183/subasta/editarUsuario.php";
-    String URL_USUARIO= "http://194.30.35.183/subasta/obtenerUsuario.php";
+
 
     EditText etContrasena, etNombre, etApellido;
     Button btnEditar, btnVolverLogin;
@@ -41,15 +42,21 @@ public class EditarPerfil extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case R.id.inicio:
                 Toast.makeText(this, "Inicio", Toast.LENGTH_LONG ).show();
                 Intent i  = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);
                 return true;
-            case R.id.registro:
+            case R.id.catalogo:
                 Toast.makeText(this, "Catálogo", Toast.LENGTH_LONG ).show();
-                i = new Intent(getApplicationContext(),Registro.class);
+                i = new Intent(getApplicationContext(),CatalogoReciclerView.class);
+                startActivity(i);
+                return true;
+            case R.id.perfil:
+                Toast.makeText(this, "Catálogo", Toast.LENGTH_LONG ).show();
+                i = new Intent(getApplicationContext(),EditarPerfil.class);
                 startActivity(i);
                 return true;
             default:
@@ -75,10 +82,9 @@ public class EditarPerfil extends AppCompatActivity {
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editar();
-                Intent intent = new Intent(getApplicationContext(), EditarPerfil.class);
-                startActivity(intent);
-                finish();
+                editar(); //edita el valor, y lo muestra
+                //ocultamos el boton porque ya está editado
+                btnEditar.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -105,9 +111,7 @@ public class EditarPerfil extends AppCompatActivity {
                             Toast.makeText(EditarPerfil.this, "Fallo en la edicion.", Toast.LENGTH_SHORT).show();
                         } else if(response.equals("MENSAJE")) {
                             Toast.makeText(EditarPerfil.this, "Editado correctamente.", Toast.LENGTH_LONG).show();
-
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -127,7 +131,6 @@ public class EditarPerfil extends AppCompatActivity {
                 return parametros;
             }
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(EditarPerfil.this);
         requestQueue.add(stringRequest);
     }
