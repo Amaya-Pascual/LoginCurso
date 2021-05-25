@@ -2,11 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="15dp"
     tools:context=".MainActivity">
 
@@ -28,7 +28,9 @@
         android:layout_below="@+id/infCorporativa"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
+        android:contentDescription="@string/bienvenido"
         android:clickable="true"
+        android:focusable="true"
         android:foregroundGravity="center_horizontal"
         app:srcCompat="@drawable/logowordpress" />
 
@@ -41,8 +43,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
+        android:autofillHints="@string/usuario"
         android:backgroundTint="@android:color/darker_gray"
-        android:drawableLeft="@drawable/icon_email"
+        android:drawableStart="@drawable/icon_email"
         android:ems="10"
         android:hint="@string/usuario"
         android:inputType="textEmailAddress" />
@@ -56,8 +59,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="8dp"
+        android:autofillHints="@string/password"
         android:backgroundTint="@android:color/darker_gray"
-        android:drawableLeft="@drawable/icon_lock"
+        android:drawableStart="@drawable/icon_lock"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword" />
@@ -69,7 +73,7 @@
         android:layout_below="@id/password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:text="@string/login"></Button>
+        android:text="@string/login"/>
 
     <Button
         android:id="@+id/buttonRegistrar"
@@ -78,7 +82,7 @@
         android:layout_below="@id/buttonLogin"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="@string/registrar"></Button>
+        android:text="@string/registrar"/>
 
 
 </RelativeLayout>

@@ -68,9 +68,10 @@ public class Registro extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 registrar();
-                Intent intent = new Intent(getApplicationContext(), Registro.class);
+                btnRegistrar.setVisibility(View.INVISIBLE);
+             /*   Intent intent = new Intent(getApplicationContext(), Registro.class);
                 startActivity(intent);
-                finish();
+                finish();*/
             }
         });
         btnVolverLogin.setOnClickListener(new View.OnClickListener() {

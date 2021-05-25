@@ -2,11 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".ObtenerPerfil">
         <ImageView
             android:id="@+id/imageView3"
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/usuario"
                 android:hint="@string/regMail"
-                android:inputType="textEmailAddress" />
+                 />
 
         </LinearLayout>
 
@@ -61,8 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/password"
-                android:hint="@string/regContrasena"
-                android:inputType="textPassword" />
+                android:hint="@string/regContrasena"         />
 
         </LinearLayout>
 
@@ -84,7 +83,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:autofillHints="@string/regNombre"
-                android:inputType="text"
                 android:hint="@string/regNombre" />
 
 
@@ -107,7 +105,6 @@
                 android:id="@+id/txtApellido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
                 android:autofillHints="@string/regApellido"
                 android:hint="@string/regApellido" />
 

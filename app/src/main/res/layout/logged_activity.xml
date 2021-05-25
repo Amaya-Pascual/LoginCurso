@@ -2,11 +2,11 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="15dp"
     tools:context=".LoggedActivity">
 
@@ -16,6 +16,8 @@
         android:layout_height="237dp"
         android:layout_centerHorizontal="true"
         android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/bienvenido"
         app:srcCompat="@drawable/logowordpress" />
 
     <TextView
@@ -68,6 +70,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="@dimen/fab_margin"
+        android:contentDescription="@string/enviar_mail"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
 </RelativeLayout>

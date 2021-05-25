@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class CatalogoReciclerView extends AppCompatActivity {
+    MediaPlayer mp;
     //url de la obtencion del json
     private static final String urlListaLotes="http://194.30.35.183/subasta/listarLotes.php";
     //array para depositar los datos obtenidos
@@ -65,6 +67,8 @@ public class CatalogoReciclerView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalogo_recicler_view);
+
+
         recycler=findViewById(R.id.recyclerId);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         //recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
@@ -82,6 +86,22 @@ public class CatalogoReciclerView extends AppCompatActivity {
             }
         });
         recycler.setAdapter(adapterLotes);
+    }
+    protected void onResume() {
+        //musica en el catalogo para que se reproduzca siempre que volvemos a ella
+        mp = MediaPlayer.create(CatalogoReciclerView.this, R.raw.alegria);
+        mp.start();
+        super.onResume();
+    }
+
+    //aunque la musica es corta, con esto al salir de esta activity se apaga la musica
+   protected void onPause() {
+        super.onPause();
+        if (mp!=null){
+            mp.stop();
+            mp.release();
+            mp=null;
+        }
     }
 
     private void llenarDatos() {

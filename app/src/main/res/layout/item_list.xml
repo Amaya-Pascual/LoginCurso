@@ -23,7 +23,8 @@
                 android:layout_marginTop="11dp"
                 android:contentDescription="@string/app_name"
                 android:src="@mipmap/ic_launcher"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:focusable="true"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,7 +45,7 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="10dp"
                         android:padding="10dp"
-                        android:text="RefLote"
+                        android:text="@string/reflote"
                         android:textAlignment="textStart"
                         android:textSize="15sp"
                         android:textStyle="bold" />
@@ -54,12 +55,12 @@
                         android:layout_width="187dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginLeft="18dp"
+                        android:layout_marginStart="18dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginEnd="20dp"
-                        android:layout_toRightOf="@id/txtrefLote"
+                        android:layout_toEndOf="@id/txtrefLote"
                         android:padding="10dp"
-                        android:text="Salida"
+                        android:text="@string/salida"
                         android:textAlignment="textEnd" />
 
                     <LinearLayout
@@ -72,7 +73,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="68dp"
                             android:padding="10dp"
-                            android:text="Descripcion" />
+                            android:text="@string/descripcion" />
                     </LinearLayout>
 
                 </RelativeLayout>
@@ -88,6 +89,6 @@
         android:layout_width="match_parent"
         android:layout_height="1sp"
         android:background="#453D3D"
-        android:text="TextView" />
+        android:text="@string/linea" />
 
 </LinearLayout>
