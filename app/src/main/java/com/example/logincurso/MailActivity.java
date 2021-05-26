@@ -16,8 +16,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -31,7 +29,7 @@ public class MailActivity extends Activity {
     File pic;
     EditText address, subject, emailtext;
     String mail, asunto, mensaje;
-
+    String currentPhotoPath;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +52,6 @@ public class MailActivity extends Activity {
         send.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-
                 try {
                     mail = address.getText().toString();
                     asunto = subject.getText().toString();
@@ -63,7 +60,7 @@ public class MailActivity extends Activity {
                     i.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
                     i.putExtra(Intent.EXTRA_SUBJECT, asunto);
                     i.putExtra(android.content.Intent.EXTRA_TEXT, mensaje);
-                    Log.d("URI@!@#!#!@##!", "AMAYA"+Uri.fromFile(pic).toString() + " " + pic.exists());
+                    //Log.d("URI@!@#!#!@##!", "AMAYA"+Uri.fromFile(pic).toString() + " " + pic.exists());
                     i.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pic));
                     i.setType("image/png");
                     startActivity(Intent.createChooser(i, "Share the jobbing"));
@@ -76,16 +73,26 @@ public class MailActivity extends Activity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        
         if (requestCode == CAMERA_PIC_REQUEST && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();            
             thumbnail = (Bitmap) extras.get("data");
             ImageView image = (ImageView) findViewById(R.id.imageView1);
             image.setImageBitmap(thumbnail);
+
             Toast.makeText(getApplicationContext(), "FOTO",
                     Toast.LENGTH_LONG).show();
             try {
-                File root = Environment.getExternalStorageDirectory();
+                //File root = Environment.getExternalStorageDirectory();
+                File root = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+
+                File imagen = File.createTempFile(
+                        "pic",  /* prefix */
+                        ".png",         /* suffix */
+                        root      /* directory */
+                );
+                // Save a file: path for use with ACTION_VIEW intents
+                currentPhotoPath = imagen.getAbsolutePath();
+
                 if (root.canWrite()) {
                     pic = new File(root, "pic.png");
                     FileOutputStream out = new FileOutputStream(pic);
