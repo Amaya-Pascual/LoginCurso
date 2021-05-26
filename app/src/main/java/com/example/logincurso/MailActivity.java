@@ -8,6 +8,7 @@ import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -24,6 +27,7 @@ import java.io.IOException;
 public class MailActivity extends Activity {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int CAMERA_PIC_REQUEST = 1337;
+    private static final int REQUEST_TAKE_PHOTO = 1;
     Button send;
     Bitmap thumbnail;
     File pic;
@@ -44,7 +48,20 @@ public class MailActivity extends Activity {
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (cameraIntent.resolveActivity(getPackageManager()) != null){
+                    // Create the File where the photo should go
+                    File photoFile = null;
+                    photoFile = createImageFile();
+                    // Continue only if the File was successfully created
+                    if (photoFile != null) {
+                        Uri photoURI = FileProvider.getUriForFile(MailActivity.this,
+                                "com.example.android.fileprovider",
+                                photoFile);
+                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                        startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
+                    }
+                }
                 startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
             }
         });
@@ -72,6 +89,8 @@ public class MailActivity extends Activity {
         });
     }
 
+
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_PIC_REQUEST && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();            
@@ -84,7 +103,6 @@ public class MailActivity extends Activity {
             try {
                 //File root = Environment.getExternalStorageDirectory();
                 File root = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
                 File imagen = File.createTempFile(
                         "pic",  /* prefix */
                         ".png",         /* suffix */
@@ -109,5 +127,9 @@ public class MailActivity extends Activity {
             }
 
         }
+    }
+    public File createImageFile(){
+        //pendiente de hacer
+       return null;
     }
 }
