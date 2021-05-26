@@ -15,5 +15,10 @@
         android:icon="@drawable/icon_lock"
         android:fontFamily="@font/akaya_kanadaka_regular"
         android:title="@string/menuPerfil"/>
+    <item
+        android:id="@+id/tumoneda"
+        android:icon="@drawable/icon_lock"
+        android:fontFamily="@font/akaya_kanadaka_regular"
+        android:title="Clasifica tu moneda"/>
 
 </menu>

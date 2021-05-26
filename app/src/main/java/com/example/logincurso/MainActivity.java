@@ -1,11 +1,20 @@
 package com.example.logincurso;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.app.VoiceInteractor;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Patterns;
@@ -33,6 +42,44 @@ public class MainActivity extends AppCompatActivity {
     private Button btnRegistro;
     private ImageView imageView;
     String usuario, passw;
+
+    //Notificaciones
+    //cuando te logueas te notifica que estas logueado y te lleva a la pantalla loggedActivity
+    private PendingIntent pendingIntent;
+    private final static String CHANNEL_ID = "NOTIFICACION";
+    private final static int NOTIFICACION_ID = 0;
+
+    private void setPendingIntent(){
+        Intent intent = new Intent(this, LoggedActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addNextIntent(intent);
+        pendingIntent = stackBuilder.getPendingIntent(1, PendingIntent.FLAG_CANCEL_CURRENT);
+    }
+    private void createNotificacionChanel(){
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+            CharSequence name = "Notificacion";
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+    }
+    private void createNotification(){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),CHANNEL_ID);
+        builder.setSmallIcon(R.drawable.ic_perfilb);
+        builder.setContentTitle("Bienvenido a Numismática Lavín");
+        builder.setContentText("Estas logueado. Puedes navegar al catalogo");
+        builder.setColor(Color.BLUE);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setLights(Color.MAGENTA, 1000, 1000);
+        builder.setVibrate(new long[]{1000,1000,1000,1000,1000});
+        builder.setDefaults(Notification.DEFAULT_SOUND);
+
+        builder.setContentIntent(pendingIntent);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+        notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,9 +150,16 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 if (!response.isEmpty()){
                     guardarPreferencias();
+
+                    //notificacion
+                    setPendingIntent();
+                    createNotificacionChanel();
+                    createNotification();
+                    //envio a la loggedActivity
                     Intent i = new Intent(getApplicationContext(), LoggedActivity.class);
                     startActivity(i);
                     finish();
+
                 }else{
                     Toast.makeText(MainActivity.this, getString(R.string.error_contras_usu), Toast.LENGTH_LONG).show();
                 }
@@ -130,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    //preferencias
+    //preferencias, guarda el mail y la contraseña para no tener que loguearse en el mismo dispositivo
     private void guardarPreferencias(){
         SharedPreferences preferences=getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

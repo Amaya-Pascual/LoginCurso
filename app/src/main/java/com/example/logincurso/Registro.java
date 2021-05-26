@@ -29,6 +29,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONException;
+
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -40,6 +42,7 @@ public class Registro extends AppCompatActivity {
     Button btnRegistrar, btnVolverLogin;
 
     //Notificaciones
+    //cuando te registras te notifica que estas registrado y te lleva la pantalla de login
     private PendingIntent pendingIntent;
     private final static String CHANNEL_ID = "NOTIFICACION";
     private final static int NOTIFICACION_ID = 0;
@@ -63,7 +66,7 @@ public class Registro extends AppCompatActivity {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),CHANNEL_ID);
         builder.setSmallIcon(R.drawable.ic_perfilb);
         builder.setContentTitle("Bienvenido a Numismática Lavín");
-        builder.setContentText("Estas logueado");
+        builder.setContentText("Estas Registrado. Ahora tienes que loguearte");
         builder.setColor(Color.BLUE);
         builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
         builder.setLights(Color.MAGENTA, 1000, 1000);
@@ -153,7 +156,6 @@ public class Registro extends AppCompatActivity {
                             Intent i = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(i);
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -170,8 +172,7 @@ public class Registro extends AppCompatActivity {
                 parametros.put("contrasena", etContrasena.getText().toString().trim());
                 parametros.put("nomCliente", etNombre.getText().toString().trim());
                 parametros.put("ape1Cliente", etApellido.getText().toString().trim());
-                return parametros;
-            }
+                return parametros;            }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(Registro.this);
         requestQueue.add(stringRequest);

@@ -60,6 +60,11 @@ public class CatalogoReciclerView extends AppCompatActivity {
                 i = new Intent(getApplicationContext(),EditarPerfil.class);
                 startActivity(i);
                 return true;
+            case R.id.tumoneda:
+                Toast.makeText(this, "Tu moneda", Toast.LENGTH_LONG ).show();
+                i = new Intent(getApplicationContext(),MailActivity.class);
+                startActivity(i);
+                return true;
             case R.id.musica:
                // Toast.makeText(this, "Musica", Toast.LENGTH_LONG ).show();
                 if (encendido){
