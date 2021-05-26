@@ -106,18 +106,18 @@ public class EditarPerfil extends AppCompatActivity {
                     public void onResponse(String response) {
                         //mensajes en el php
                         if(response.equals("ERROR 1")) {
-                            Toast.makeText(EditarPerfil.this, "Se deben de llenar todos los campos.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditarPerfil.this, getString(R.string.error_campos_vacios), Toast.LENGTH_SHORT).show();
                         } else if(response.equals("ERROR 2")) {
-                            Toast.makeText(EditarPerfil.this, "Fallo en la edicion.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditarPerfil.this, getString(R.string.error_edicion), Toast.LENGTH_SHORT).show();
                         } else if(response.equals("MENSAJE")) {
-                            Toast.makeText(EditarPerfil.this, "Editado correctamente.", Toast.LENGTH_LONG).show();
+                            Toast.makeText(EditarPerfil.this, getString(R.string.edicion_correcta), Toast.LENGTH_LONG).show();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // En caso de tener algun error en la obtencion de los datos
-                Toast.makeText(EditarPerfil.this, "ERROR CON LA CONEXION", Toast.LENGTH_LONG).show();
+                Toast.makeText(EditarPerfil.this, getString(R.string.error_conexion), Toast.LENGTH_LONG).show();
             }
         }){
             @Override

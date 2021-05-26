@@ -7,12 +7,12 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
+
 import android.view.MenuItem;
-import android.view.MotionEvent;
+
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,17 +35,17 @@ public class LoggedActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.inicio:
-                Toast.makeText(this, "Inicio", Toast.LENGTH_LONG ).show();
+                Toast.makeText(this, getString(R.string.menu1inicio), Toast.LENGTH_LONG ).show();
                 Intent i  = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);
                 return true;
             case R.id.catalogo:
-                Toast.makeText(this, "Catálogo", Toast.LENGTH_LONG ).show();
+                Toast.makeText(this, getString(R.string.menu1catalogo), Toast.LENGTH_LONG ).show();
                 i = new Intent(getApplicationContext(),CatalogoReciclerView.class);
                 startActivity(i);
                 return true;
             case R.id.perfil:
-                Toast.makeText(this, "Perfil", Toast.LENGTH_LONG ).show();
+                Toast.makeText(this, getString(R.string.menu1perfil), Toast.LENGTH_LONG ).show();
                 i = new Intent(getApplicationContext(),EditarPerfil.class);
                 startActivity(i);
                 return true;
@@ -65,7 +65,7 @@ public class LoggedActivity extends AppCompatActivity {
         imagenLavin = findViewById(R.id.imageView2);
         SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
         String dato = preferences.getString("mail", "usuario");
-        bienvenida.setText("Usuario registrado: " + dato);
+        bienvenida.setText(getString(R.string.welcome) +", " + dato);
         FloatingActionButton fab;
         fab=findViewById(R.id.fab);
 
@@ -99,7 +99,7 @@ public class LoggedActivity extends AppCompatActivity {
         imagenLavin.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(LoggedActivity.this, "Dónde estamos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoggedActivity.this, getString(R.string.map_donde_estamos), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), UbicacionTiendaMap.class);
                 startActivity(intent);
                 return false;
@@ -111,7 +111,7 @@ public class LoggedActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
                 preferences.edit().clear().commit();
-                Toast.makeText(LoggedActivity.this, "Se borran sus datos de sesion", Toast.LENGTH_LONG).show();
+                Toast.makeText(LoggedActivity.this, getString(R.string.borra_datos_sesion), Toast.LENGTH_LONG).show();
                 //hemos borrado lo guardado en preferencias
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
@@ -127,14 +127,14 @@ public class LoggedActivity extends AppCompatActivity {
                     startActivity(callIntent);
                 } catch (ActivityNotFoundException e)
                 {
-                    Toast.makeText(LoggedActivity.this, "Ha habido un error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoggedActivity.this, getString(R.string.error_llamar), Toast.LENGTH_LONG).show();
                 }
             }
         });
         btnCatalogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoggedActivity.this, "Catálogo de lotes", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoggedActivity.this, getString(R.string.catalogo), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), CatalogoReciclerView.class);
                 startActivity(intent);
             }

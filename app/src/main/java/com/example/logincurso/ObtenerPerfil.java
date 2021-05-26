@@ -27,17 +27,17 @@ public class ObtenerPerfil extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.inicio:
-                Toast.makeText(this, "Inicio", Toast.LENGTH_LONG ).show();
+                Toast.makeText(this,getString(R.string.menu1inicio), Toast.LENGTH_LONG ).show();
                 Intent i  = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);
                 return true;
             case R.id.catalogo:
-                Toast.makeText(this, "Catálogo", Toast.LENGTH_LONG ).show();
+                Toast.makeText(this, getString(R.string.menu1catalogo), Toast.LENGTH_LONG ).show();
                 i = new Intent(getApplicationContext(),CatalogoReciclerView.class);
                 startActivity(i);
                 return true;
             case R.id.perfil:
-                Toast.makeText(this, "Perfil", Toast.LENGTH_LONG ).show();
+                Toast.makeText(this, getString(R.string.menu1perfil), Toast.LENGTH_LONG ).show();
                 i = new Intent(getApplicationContext(),EditarPerfil.class);
                 startActivity(i);
                 return true;

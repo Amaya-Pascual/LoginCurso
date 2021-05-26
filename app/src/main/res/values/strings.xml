@@ -43,4 +43,21 @@
     <string name="linea">linea</string>
     <string name="enviar_mail">Enviar mail</string>
     <string name="mostrar_foto">Mostrar Foto</string>
+    <string name="menumusica">Musica on/off</string>
+    <string name="menu1inicio">Inicio</string>
+    <string name="menu1catalogo">Catálogo</string>
+    <string name="menu1perfil">Perfil</string>
+    <string name="menumusicaon">Música ON</string>
+    <string name="menumusicaoff">Música OFF</string>
+    <string name="error_campos_vacios">Se deben llenar todos los campos</string>
+    <string name="error_registro">Error en el registro</string>
+    <string name="registro_correcto">Registro correcto</string>
+    <string name="error_conexion">Error de conexión</string>
+    <string name="error_edicion">Error en la edición</string>
+    <string name="edicion_correcta">Edición correcta</string>
+    <string name="map_donde_estamos">Dónde estamos</string>
+    <string name="borra_datos_sesion">Se borran los datos de sesión de su dispositivo</string>
+    <string name="error_llamar">Error al intentar llamar</string>
+    <string name="error_contras_usu">Error de usuario o contraseña</string>
+
 </resources>

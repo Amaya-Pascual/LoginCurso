@@ -37,8 +37,10 @@
             android:id="@+id/txtmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="20sp"
             android:autofillHints="@string/usuario"
-            android:hint="@string/regMail"/>
+            android:hint="@string/regMail"
+            android:fontFamily="@font/akaya_kanadaka_regular"/>
 
     </LinearLayout>
 
@@ -61,7 +63,8 @@
             android:layout_height="wrap_content"
             android:autofillHints="@string/password"
             android:hint="@string/regContrasena"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:fontFamily="@font/akaya_kanadaka_regular"/>
 
     </LinearLayout>
 
@@ -84,7 +87,8 @@
             android:layout_height="wrap_content"
             android:autofillHints="@string/regNombre"
             android:inputType="text"
-            android:hint="@string/regNombre" />
+            android:hint="@string/regNombre"
+            android:fontFamily="@font/akaya_kanadaka_regular"/>
 
 
     </LinearLayout>
@@ -108,7 +112,8 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:autofillHints="@string/regApellido"
-            android:hint="@string/regApellido" />
+            android:hint="@string/regApellido"
+            android:fontFamily="@font/akaya_kanadaka_regular"/>
 
 
     </LinearLayout>
@@ -123,6 +128,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:text="@string/btnEditar"
+        android:fontFamily="@font/akaya_kanadaka_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
@@ -135,6 +141,7 @@
         android:layout_marginTop="104dp"
         android:layout_marginEnd="16dp"
         android:text="@string/btnVolverLogin"
+        android:fontFamily="@font/akaya_kanadaka_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"

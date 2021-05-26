@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginCurso"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ObtenerPerfil"></activity>
+        <activity android:name=".MailActivity"></activity>
+        <activity android:name=".ObtenerPerfil" />
         <activity android:name=".EditarPerfil" />
         <activity android:name=".CatalogoReciclerView" />
         <!--

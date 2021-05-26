@@ -15,5 +15,10 @@
         android:icon="@drawable/icon_lock"
         android:fontFamily="@font/akaya_kanadaka_regular"
         android:title="@string/menuPerfil"/>
+    <item
+        android:id="@+id/musica"
+        android:icon="@drawable/icon_lock"
+        android:fontFamily="@font/akaya_kanadaka_regular"
+        android:title="@string/menumusica"/>
 
 </menu>

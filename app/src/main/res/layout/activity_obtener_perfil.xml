@@ -37,6 +37,8 @@
                 android:id="@+id/txtmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:fontFamily="@font/akaya_kanadaka_regular"
                 android:autofillHints="@string/usuario"
                 android:hint="@string/regMail"
                  />
@@ -60,6 +62,7 @@
                 android:id="@+id/txtContrasena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/akaya_kanadaka_regular"
                 android:autofillHints="@string/password"
                 android:hint="@string/regContrasena"         />
 
@@ -82,6 +85,7 @@
                 android:id="@+id/txtNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/akaya_kanadaka_regular"
                 android:autofillHints="@string/regNombre"
                 android:hint="@string/regNombre" />
 
@@ -105,6 +109,7 @@
                 android:id="@+id/txtApellido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/akaya_kanadaka_regular"
                 android:autofillHints="@string/regApellido"
                 android:hint="@string/regApellido" />
 
@@ -120,6 +125,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:fontFamily="@font/akaya_kanadaka_regular"
             android:text="@string/btnEditar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -132,6 +138,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="104dp"
             android:layout_marginEnd="16dp"
+            android:fontFamily="@font/akaya_kanadaka_regular"
             android:text="@string/btnVolverLogin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"

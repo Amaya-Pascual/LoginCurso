@@ -26,7 +26,9 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/imageView2"
+        android:textSize="20sp"
         android:text="@string/welcome"
+        android:fontFamily="@font/akaya_kanadaka_regular"
          />
 
 
@@ -37,6 +39,7 @@
         android:layout_below="@id/bienvenida"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/akaya_kanadaka_regular"
         android:text="@string/btnLLamar">
 
     </Button>
@@ -47,6 +50,7 @@
         android:layout_below="@id/btnLlamar"
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/akaya_kanadaka_regular"
         android:text="@string/btnCatalogo">
 
     </Button>
@@ -58,6 +62,7 @@
         android:layout_below="@id/btnCatalogo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:fontFamily="@font/akaya_kanadaka_regular"
         android:text="@string/cerrarSesion">
     </Button>
 

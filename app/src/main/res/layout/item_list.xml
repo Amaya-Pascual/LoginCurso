@@ -48,7 +48,8 @@
                         android:text="@string/reflote"
                         android:textAlignment="textStart"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:fontFamily="@font/akaya_kanadaka_regular"/>
 
                     <TextView
                         android:id="@+id/txtsalida"
@@ -61,7 +62,8 @@
                         android:layout_toEndOf="@id/txtrefLote"
                         android:padding="10dp"
                         android:text="@string/salida"
-                        android:textAlignment="textEnd" />
+                        android:textAlignment="textEnd"
+                        android:fontFamily="@font/akaya_kanadaka_regular"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -73,7 +75,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="68dp"
                             android:padding="10dp"
-                            android:text="@string/descripcion" />
+                            android:text="@string/descripcion"
+                            android:fontFamily="@font/akaya_kanadaka_regular"/>
                     </LinearLayout>
 
                 </RelativeLayout>

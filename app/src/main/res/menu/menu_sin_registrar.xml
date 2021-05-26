@@ -3,10 +3,12 @@
     <item
         android:id="@+id/inicio"
         android:icon="@drawable/icon_lock"
+        android:fontFamily="@font/akaya_kanadaka_regular"
         android:title="@string/menuPrincipal"/>
     <item
         android:id="@+id/registro"
         android:icon="@drawable/icon_lock"
+        android:fontFamily="@font/akaya_kanadaka_regular"
         android:title="@string/registrotxt"/>
 
 </menu>

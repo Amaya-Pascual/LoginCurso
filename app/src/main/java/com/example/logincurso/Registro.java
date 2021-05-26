@@ -1,8 +1,18 @@
 package com.example.logincurso;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +39,43 @@ public class Registro extends AppCompatActivity {
     EditText etUsuario, etContrasena, etNombre, etApellido;
     Button btnRegistrar, btnVolverLogin;
 
+    //Notificaciones
+    private PendingIntent pendingIntent;
+    private final static String CHANNEL_ID = "NOTIFICACION";
+    private final static int NOTIFICACION_ID = 0;
+
+    private void setPendingIntent(){
+        Intent intent = new Intent(this, MainActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addNextIntent(intent);
+        pendingIntent = stackBuilder.getPendingIntent(1, PendingIntent.FLAG_CANCEL_CURRENT);
+    }
+    private void createNotificacionChanel(){
+        if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.O){
+            CharSequence name = "Notificacion";
+            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+            notificationManager.createNotificationChannel(notificationChannel);
+        }
+    }
+    private void createNotification(){
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),CHANNEL_ID);
+        builder.setSmallIcon(R.drawable.ic_perfilb);
+        builder.setContentTitle("Bienvenido a Numismática Lavín");
+        builder.setContentText("Estas logueado");
+        builder.setColor(Color.BLUE);
+        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        builder.setLights(Color.MAGENTA, 1000, 1000);
+        builder.setVibrate(new long[]{1000,1000,1000,1000,1000});
+        builder.setDefaults(Notification.DEFAULT_SOUND);
+
+        builder.setContentIntent(pendingIntent);
+
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
+        notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
+    }
+
     //menu
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_sin_registrar, menu);
@@ -38,12 +85,12 @@ public class Registro extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.inicio:
-                Toast.makeText(this, "Inicio", Toast.LENGTH_LONG ).show();
+                Toast.makeText(this, getString(R.string.menu1inicio), Toast.LENGTH_LONG ).show();
                 Intent i  = new Intent(getApplicationContext(),MainActivity.class);
                 startActivity(i);
                 return true;
             case R.id.registro:
-                Toast.makeText(this, "Catálogo", Toast.LENGTH_LONG ).show();
+                Toast.makeText(this, getString(R.string.menu1catalogo), Toast.LENGTH_LONG ).show();
                 i = new Intent(getApplicationContext(),Registro.class);
                 startActivity(i);
                 return true;
@@ -93,12 +140,18 @@ public class Registro extends AppCompatActivity {
                     public void onResponse(String response) {
                     //mensajes en el php
                         if(response.equals("ERROR 1")) {
-                            Toast.makeText(Registro.this, "Se deben de llenar todos los campos.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Registro.this, getString(R.string.error_campos_vacios), Toast.LENGTH_SHORT).show();
                         } else if(response.equals("ERROR 2")) {
-                            Toast.makeText(Registro.this, "Fallo el registro.", Toast.LENGTH_SHORT).show();
+                            //por ejemplo, si hay una restriccion unique en la bd
+                            Toast.makeText(Registro.this, getString(R.string.error_registro), Toast.LENGTH_SHORT).show();
                         } else if(response.equals("MENSAJE")) {
-                            Toast.makeText(Registro.this, "Registrado correctamente.", Toast.LENGTH_LONG).show();
-
+                            Toast.makeText(Registro.this, getString(R.string.registro_correcto), Toast.LENGTH_LONG).show();
+                            //notificacion
+                            setPendingIntent();
+                            createNotificacionChanel();
+                            createNotification();
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(i);
                         }
 
                     }
@@ -106,12 +159,11 @@ public class Registro extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // En caso de tener algun error en la obtencion de los datos
-                Toast.makeText(Registro.this, "ERROR CON LA CONEXION", Toast.LENGTH_LONG).show();
+                Toast.makeText(Registro.this, getString(R.string.error_conexion), Toast.LENGTH_LONG).show();
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-
                 // En este metodo se hace el envio de valores de la aplicacion al servidor
                 Map<String, String> parametros = new Hashtable<String, String>();
                 parametros.put("mail", etUsuario.getText().toString().trim());
@@ -121,8 +173,8 @@ public class Registro extends AppCompatActivity {
                 return parametros;
             }
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(Registro.this);
         requestQueue.add(stringRequest);
     }
+
 }

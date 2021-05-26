@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         imageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                Toast.makeText(MainActivity.this, "Dónde estamos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, getString(R.string.map_donde_estamos), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getApplicationContext(), UbicacionTiendaMap.class);
                 startActivity(intent);
                 return false;
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(i);
                     finish();
                 }else{
-                    Toast.makeText(MainActivity.this, "Contraseña o usuario incorrectos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, getString(R.string.error_contras_usu), Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
