@@ -28,7 +28,7 @@ public class MailActivity extends Activity {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int CAMERA_PIC_REQUEST = 1337;
     private static final int REQUEST_TAKE_PHOTO = 1;
-    Button send;
+    Button send, salir;
     Bitmap thumbnail;
     File pic;
     EditText address, subject, emailtext;
@@ -43,6 +43,7 @@ public class MailActivity extends Activity {
         address = (EditText) findViewById(R.id.emailaddress);
         subject = (EditText) findViewById(R.id.emailsubject);
         emailtext = (EditText) findViewById(R.id.emailtext);
+        salir= (Button) findViewById((R.id.btnsalir));
 
         Button camera = (Button) findViewById(R.id.btncamara);
         camera.setOnClickListener(new View.OnClickListener() {
@@ -65,18 +66,29 @@ public class MailActivity extends Activity {
             }
         });
 
+        salir.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoggedActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         send.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 try {
-                    mail = address.getText().toString();
+                    // si no has scado foto
+                    if (!(pic == null)){
+                   // mail = address.getText().toString();
+                        mail ="lavin@numismaticalavin.com";
                     asunto = subject.getText().toString();
                     mensaje = emailtext.getText().toString();
                     Intent i = new Intent(Intent.ACTION_SEND);
                     i.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
                     i.putExtra(Intent.EXTRA_SUBJECT, asunto);
                     i.putExtra(android.content.Intent.EXTRA_TEXT, mensaje);
-                    //Log.d("URI@!@#!#!@##!", "AMAYA"+Uri.fromFile(pic).toString() + " " + pic.exists());
                     Uri imageUri = FileProvider.getUriForFile(
                             MailActivity.this,
                             "com.example.logincurso.provider", //(use your app signature + ".provider" )
@@ -84,6 +96,24 @@ public class MailActivity extends Activity {
                     i.putExtra(Intent.EXTRA_STREAM, imageUri);
                     i.setType("image/png");
                     startActivity(Intent.createChooser(i, "Compartir"));
+                   }else{
+
+                    String uriText =
+                            "mailto:lavin@numismaticalavin.com" +
+                                    "?subject=" + Uri.encode("Asunto...") +
+                                    "&body=" + Uri.encode("Cuerpo del mensaje...");
+
+                    Uri uri = Uri.parse(uriText);
+                    Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
+                    sendIntent.setData(uri);
+                        try {
+                            startActivity(Intent.createChooser(sendIntent, getString(R.string.enviarMail)));
+                        } catch (ActivityNotFoundException e)
+                        {
+                            Toast.makeText(MailActivity.this, R.string.errorMail, Toast.LENGTH_LONG).show();
+                        }}
+
+
                 }catch (Throwable t){
                     Toast.makeText(getApplicationContext(), t.toString(),
                             Toast.LENGTH_LONG).show();
@@ -98,8 +128,9 @@ public class MailActivity extends Activity {
             ImageView image = (ImageView) findViewById(R.id.imageView1);
             image.setImageBitmap(thumbnail);
 
-            Toast.makeText(getApplicationContext(), "FOTO",
-                    Toast.LENGTH_LONG).show();
+           /* Toast.makeText(getApplicationContext(), "FOTO",
+                    Toast.LENGTH_LONG).show();*/
+
             try {
                 //File root = Environment.getExternalStorageDirectory();
                 File root = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -117,8 +148,8 @@ public class MailActivity extends Activity {
                     thumbnail.compress(CompressFormat.PNG, 100, out);
                     out.flush();
                     out.close();
-                    Toast.makeText(getApplicationContext(), "FOTO2",
-                            Toast.LENGTH_LONG).show();
+                /*    Toast.makeText(getApplicationContext(), "FOTO2",
+                            Toast.LENGTH_LONG).show();*/
                 }
             } catch (IOException e) {
                 Log.e("BROKEN", "Could not write file " + e.getMessage());
@@ -129,7 +160,7 @@ public class MailActivity extends Activity {
         }
     }
     public File createImageFile(){
-        //pendiente de hacer
+        //
        return null;
     }
 }
