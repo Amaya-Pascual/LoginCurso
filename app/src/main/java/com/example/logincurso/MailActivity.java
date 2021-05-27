@@ -33,7 +33,7 @@ public class MailActivity extends Activity {
     File pic;
     EditText address, subject, emailtext;
     String mail, asunto, mensaje;
-    String currentPhotoPath;
+    String currentPhotoPath; //donde se ha guardado la foto
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,14 +50,13 @@ public class MailActivity extends Activity {
             public void onClick(View arg0) {
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (cameraIntent.resolveActivity(getPackageManager()) != null){
-                    // Create the File where the photo should go
+                    // Crea el fichero donde va la foto
                     File photoFile = null;
                     photoFile = createImageFile();
-                    // Continue only if the File was successfully created
+                    // Solo continua si el fichero se ha creado bien
                     if (photoFile != null) {
                         Uri photoURI = FileProvider.getUriForFile(MailActivity.this,
-                                "com.example.android.fileprovider",
-                                photoFile);
+                                "com.example.android.fileprovider", photoFile);
                         cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                         startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
                     }
@@ -78,7 +77,11 @@ public class MailActivity extends Activity {
                     i.putExtra(Intent.EXTRA_SUBJECT, asunto);
                     i.putExtra(android.content.Intent.EXTRA_TEXT, mensaje);
                     //Log.d("URI@!@#!#!@##!", "AMAYA"+Uri.fromFile(pic).toString() + " " + pic.exists());
-                    i.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(pic));
+                    Uri imageUri = FileProvider.getUriForFile(
+                            MailActivity.this,
+                            "com.example.logincurso.provider", //(use your app signature + ".provider" )
+                            pic);
+                    i.putExtra(Intent.EXTRA_STREAM, imageUri);
                     i.setType("image/png");
                     startActivity(Intent.createChooser(i, "Share the jobbing"));
                 }catch (Throwable t){
