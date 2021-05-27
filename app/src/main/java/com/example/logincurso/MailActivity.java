@@ -83,7 +83,7 @@ public class MailActivity extends Activity {
                             pic);
                     i.putExtra(Intent.EXTRA_STREAM, imageUri);
                     i.setType("image/png");
-                    startActivity(Intent.createChooser(i, "Share the jobbing"));
+                    startActivity(Intent.createChooser(i, "Compartir"));
                 }catch (Throwable t){
                     Toast.makeText(getApplicationContext(), t.toString(),
                             Toast.LENGTH_LONG).show();
@@ -91,9 +91,6 @@ public class MailActivity extends Activity {
             }
         });
     }
-
-
-
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_PIC_REQUEST && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();            
