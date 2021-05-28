@@ -148,18 +148,20 @@ public class MainActivity extends AppCompatActivity {
         btnRegistro=findViewById(R.id.buttonRegistrar);
         //imagen en la primera pantalla
         imageView= findViewById(R.id.imageView);
-        recuperarPreferencias();
-        //una vez registrado presenta los datos de login
+
+        //una vez registrado presenta los datos de login si viene de login o de edit
         Bundle extra = getIntent().getExtras();
         if (extra !=null){
             email = extra.getString("correo");
             contras = extra.getString("contras");
-        }
+
         // configuras los valores
         user.setText(email);
-        password.setText(contras);
-
-
+        password.setText(contras);}
+        else{
+            //revupera preferencias si no viene de login o de editarperfil
+            recuperarPreferencias();
+        }
         imageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {

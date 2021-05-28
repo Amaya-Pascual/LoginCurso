@@ -23,7 +23,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.logincurso.POJOS.Lote;
+import com.example.logincurso.POJOS.Usuario;
 import com.google.android.material.snackbar.Snackbar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Collection;
 import java.util.Hashtable;
@@ -32,11 +38,11 @@ import java.util.Map;
 public class EditarPerfil extends AppCompatActivity {
     //conexion bd
     String URL_SERVIDOR = "http://194.30.35.183/subasta/editarUsuario.php";
-
-
+    String URL_MOSTRAR ="http://194.30.35.183/subasta/obtenerUsuario.php";
     EditText etContrasena, etNombre, etApellido;
-    Button btnEditar, btnVolverLogin;
+    Button btnEditar, btnVolverLogin, btnMostrar;
     TextView txtMail;
+    Usuario usuario;
 
     //menu
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -58,7 +64,7 @@ public class EditarPerfil extends AppCompatActivity {
                 startActivity(i);
                 return true;
             case R.id.perfil:
-                Toast.makeText(this, "Catálogo", Toast.LENGTH_LONG ).show();
+                Toast.makeText(this, "Perfil", Toast.LENGTH_LONG ).show();
                 i = new Intent(getApplicationContext(),EditarPerfil.class);
                 startActivity(i);
                 return true;
@@ -102,6 +108,7 @@ public class EditarPerfil extends AppCompatActivity {
         etNombre = findViewById(R.id.etNombre);
         etApellido = findViewById(R.id.etApellido);
         btnEditar = findViewById(R.id.btnEditar);
+        btnMostrar = findViewById(R.id.btnMostrar);
         btnVolverLogin = findViewById(R.id.btnVolverLogin);
         SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
         String mail = preferences.getString("mail", "usuario");
@@ -113,7 +120,16 @@ public class EditarPerfil extends AppCompatActivity {
             public void onClick(View view) {
                 editar(); //edita el valor, y lo muestra
                 //ocultamos el boton porque ya está editado
-                btnEditar.setVisibility(View.INVISIBLE);
+               // btnEditar.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        btnMostrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mostrar(); //muestra lo que hay en la base de datos
+                //ocultamos el boton porque ya está editado
+                //btnMostrar.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -127,6 +143,53 @@ public class EditarPerfil extends AppCompatActivity {
         });
 
     }
+
+    private void mostrar() {
+        StringRequest stringRequest;
+        stringRequest = new StringRequest(Request.Method.POST, URL_MOSTRAR,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                             Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                        try {
+                            JSONArray array = new JSONArray(response);
+                            for (int i = 0; i < array.length(); i++) {
+                                //Toast.makeText(getApplicationContext(), i+"",Toast.LENGTH_SHORT).show();
+                                JSONObject usuario = array.getJSONObject(i);
+                                usuario.getString("nomCliente");
+                                usuario.getString("ape1Cliente");
+                                usuario.getString("mail");
+
+                                ;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // En caso de tener algun error en la obtencion de los datos
+                Toast.makeText(EditarPerfil.this, getString(R.string.error_conexion), Toast.LENGTH_LONG).show();
+            }
+        })/*{
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                // En este metodo se hace el envio de valores de la aplicacion al servidor
+                Map<String, String> parametros = new Hashtable<String, String>();
+                parametros.put("mail", txtMail.getText().toString().trim());
+                parametros.put("contrasena", etContrasena.getText().toString().trim());
+                parametros.put("nomCliente", etNombre.getText().toString().trim());
+                parametros.put("ape1Cliente", etApellido.getText().toString().trim());
+                return parametros;
+            }
+        }*/;
+        RequestQueue requestQueue = Volley.newRequestQueue(EditarPerfil.this);
+        requestQueue.add(stringRequest);
+    }
+
+
     private void editar() {
         StringRequest stringRequest;
         stringRequest = new StringRequest(Request.Method.POST, URL_SERVIDOR,
@@ -146,6 +209,13 @@ public class EditarPerfil extends AppCompatActivity {
                             i.putExtra("contras", etContrasena.getText().toString().trim());
                             i.putExtra("nom", etNombre.getText().toString().trim());
                             i.putExtra("ape", etApellido.getText().toString().trim());
+
+                            //coloca los valores en cada campo en la presentacion de la edicion del perfil
+                            etContrasena.setText(etContrasena.getText().toString().trim());
+                            etNombre.setText(etNombre.getText().toString().trim());
+                            etApellido.setText(etApellido.getText().toString().trim());
+                            //lanza la activity
+
                             startActivity(i);
                         }
                     }

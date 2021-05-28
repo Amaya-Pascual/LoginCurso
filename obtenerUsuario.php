@@ -10,9 +10,13 @@ $usu_usuario="kk@kk.es";
 			$result = $pdo ->prepare($sql);
 			$result->execute();
 			$resultado = $result->fetch(PDO::FETCH_ASSOC);
-			echo json_encode($resultado,JSON_UNESCAPED_UNICODE); 	
+			
+				
 			
 			$cuenta = $result->rowCount();
+		
+				echo json_encode($resultado,JSON_UNESCAPED_UNICODE); 
+			
 			        
     
 

@@ -13,7 +13,7 @@ public class Splash extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //sonido en la pantalla de entrada
-        mp = MediaPlayer.create(Splash.this, R.raw.app_src_main_res_raw_correcto);
+        mp = MediaPlayer.create(Splash.this, R.raw.inicioapp);
         mp.start();
         Intent intent = new Intent(this, PresentacionActivity.class);
         startActivity(intent);

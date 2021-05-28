@@ -103,7 +103,7 @@ public class CatalogoReciclerView extends AppCompatActivity {
         adapterLotes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("has hecho click");
+                //System.out.println("has hecho click");
                 Toast.makeText(getApplicationContext(),
                         "texto",
                         Toast.LENGTH_SHORT).show();
@@ -111,6 +111,7 @@ public class CatalogoReciclerView extends AppCompatActivity {
         });
         recycler.setAdapter(adapterLotes);
     }
+    //musica
     protected void onResume() {
         super.onResume();
         //musica en el catalogo para que se reproduzca siempre que volvemos a ella
