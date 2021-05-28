@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 
 import android.view.MenuItem;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,9 +52,35 @@ public class LoggedActivity extends AppCompatActivity {
                 startActivity(i);
                 return true;
             case R.id.tumoneda:
-                Toast.makeText(this, "Tu moneda", Toast.LENGTH_LONG ).show();
+                //para que el snackbar salga arriba FrameLayout.LayoutParams
+                String enviaFoto="Enviar una foto. \nPara enviar foto pulsa en Cámara, \nsaca la foto, acepta,y después modifica \nel Asunto y \nel Cuerpo del mensaje";
+                //creo el snack, con el texto deseado
+                Snackbar snack = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), enviaFoto, Snackbar.LENGTH_INDEFINITE);
+                //obtengo el textView del snack
+                TextView snckBarTxt = (TextView) snack.getView().findViewById(com.google.android.material.R.id.snackbar_text); //si cambia la version gradle, hay que revisar esto
+                //para que ocupe el espacio que necesite
+                snckBarTxt.setSingleLine(false);
+                //Obtengo la vista
+                View view = snack.getView();
+                //parametros de la vista del snack
+                FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+                //arriba
+                params.gravity = Gravity.TOP;
+                //params.height=340; //altura, pero si se pone setSingleLine no hace falta pq se ajusta a las lineas del texto
+                view.setLayoutParams(params);
+                snack
+                        .setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent i = new Intent(getApplicationContext(), MailActivity.class);
+                                startActivity(i);
+                                finish();
+                             }
+                        }).show();
+
+               /* Toast.makeText(this, getString(R.string.tu_moneda_menu), Toast.LENGTH_LONG ).show();
                 i = new Intent(getApplicationContext(),MailActivity.class);
-                startActivity(i);
+                startActivity(i);*/
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -120,13 +148,13 @@ public class LoggedActivity extends AppCompatActivity {
                 //hemos borrado lo guardado en preferencias
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
         btnLlamar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri number = Uri.parse("tel:5551234");
+                Uri number = Uri.parse("tel:944158010");
                 Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
                 try {
                     startActivity(callIntent);
@@ -147,4 +175,5 @@ public class LoggedActivity extends AppCompatActivity {
 
 
     }
+
 }

@@ -59,5 +59,14 @@
     <string name="borra_datos_sesion">Se borran los datos de sesión de su dispositivo</string>
     <string name="error_llamar">Error al intentar llamar</string>
     <string name="error_contras_usu">Error de usuario o contraseña</string>
+    <string name="camara">Camara</string>
+    <string name="clasifica_mi_moneda">Clasifica mi moneda</string>
+    <string name="cuerpo_del_mensaje">Cuerpo del mensaje</string>
+    <string name="enviarFoto">Enviar</string>
+    <string name="salirDeFoto">Salir</string>
+    <string name="numislav_gmail_com">numislav@gmail.com</string>
+    <string name="tu_moneda_menu">Tu moneda</string>
+    <string name="clasifica_tu_moneda">Clasifica tu moneda</string>
+    <string name="instruccionesMailFoto">Enviar una foto. \nPara enviar foto pulsa en Cámara, \nsaca la foto, acepta,y después modifica \nel Asunto y \nel Cuerpo del mensaje</string>
 
 </resources>

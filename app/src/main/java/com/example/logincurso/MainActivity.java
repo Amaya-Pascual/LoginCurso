@@ -9,19 +9,24 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
-import android.app.VoiceInteractor;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+
 import android.util.Patterns;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -31,8 +36,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.snackbar.Snackbar;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,8 +86,60 @@ public class MainActivity extends AppCompatActivity {
         notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
     }
 
+    //menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_sin_registrar, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.inicio:
+                Toast.makeText(this, getString(R.string.menu1inicio), Toast.LENGTH_LONG ).show();
+                //Intent i  = new Intent(getApplicationContext(),MainActivity.class);
+                //startActivity(i);
+                return true;
+            case R.id.registro:
+                Toast.makeText(this, getString(R.string.menu1catalogo), Toast.LENGTH_LONG ).show();
+                Intent i = new Intent(getApplicationContext(),Registro.class);
+                startActivity(i);
+                return true;
+            case R.id.tumoneda:
+                //para que el snackbar salga arriba FrameLayout.LayoutParams
+                String enviaFoto=getString(R.string.instruccionesMailFoto);
+                //creo el snack, con el texto deseado
+                Snackbar snack = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), enviaFoto, Snackbar.LENGTH_INDEFINITE);
+                //obtengo el textView del snack
+                TextView snckBarTxt = snack.getView().findViewById(com.google.android.material.R.id.snackbar_text); //si cambia la version gradle, hay que revisar esto
+                //para que ocupe el espacio que necesite
+                snckBarTxt.setSingleLine(false);
+                //Obtengo la vista
+                View view = snack.getView();
+                //parametros de la vista del snack
+                FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+                //arriba
+                params.gravity = Gravity.TOP;
+                //params.height=340; //altura, pero si se pone setSingleLine no hace falta pq se ajusta a las lineas del texto
+                view.setLayoutParams(params);
+                snack
+                        .setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent i = new Intent(getApplicationContext(), MailActivity.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        }).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String email = null, contras = null;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         password=findViewById(R.id.password);
@@ -92,6 +149,16 @@ public class MainActivity extends AppCompatActivity {
         //imagen en la primera pantalla
         imageView= findViewById(R.id.imageView);
         recuperarPreferencias();
+        //una vez registrado presenta los datos de login
+        Bundle extra = getIntent().getExtras();
+        if (extra !=null){
+            email = extra.getString("correo");
+            contras = extra.getString("contras");
+        }
+        // configuras los valores
+        user.setText(email);
+        password.setText(contras);
+
 
         imageView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -139,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Registro.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
     }
@@ -158,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                     //envio a la loggedActivity
                     Intent i = new Intent(getApplicationContext(), LoggedActivity.class);
                     startActivity(i);
-                    finish();
+                   // finish();
 
                 }else{
                     Toast.makeText(MainActivity.this, getString(R.string.error_contras_usu), Toast.LENGTH_LONG).show();
@@ -172,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parametros = new HashMap<String, String>();
+                Map<String, String> parametros = new HashMap<>();
                 parametros.put("mail", usuario);
                 parametros.put("contrasena", passw);
                 return parametros;

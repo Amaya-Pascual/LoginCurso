@@ -10,5 +10,10 @@
         android:icon="@drawable/icon_lock"
         android:fontFamily="@font/akaya_kanadaka_regular"
         android:title="@string/registrotxt"/>
+    <item
+        android:id="@+id/tumoneda"
+        android:icon="@drawable/icon_lock"
+        android:fontFamily="@font/akaya_kanadaka_regular"
+        android:title="@string/clasifica_tu_moneda"/>
 
 </menu>

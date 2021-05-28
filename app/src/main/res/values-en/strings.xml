@@ -57,4 +57,13 @@
     <string name="borra_datos_sesion">Presets and settings deleted from device</string>
     <string name="error_llamar">Phone error</string>
     <string name="error_contras_usu">Wrong username or password</string>
+    <string name="camara">Camera</string>
+    <string name="clasifica_mi_moneda">Clasification</string>
+    <string name="cuerpo_del_mensaje">Subject</string>
+    <string name="enviarFoto">Send Photo</string>
+    <string name="salirDeFoto">Exit Photo sending</string>
+    <string name="numislav_gmail_com">numislav@gmail.com</string>
+    <string name="tu_moneda_menu">Your coin</string>
+    <string name="clasifica_tu_moneda">Clasification</string>
+    <string name="instruccionesMailFoto">Sending photo. Click on Camera,  take your photo, accept, write your subject and message</string>
 </resources>

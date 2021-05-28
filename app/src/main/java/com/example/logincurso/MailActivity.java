@@ -2,7 +2,9 @@ package com.example.logincurso;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
@@ -25,10 +27,10 @@ import java.io.IOException;
 
 
 public class MailActivity extends Activity {
-    private static final int REQUEST_IMAGE_CAPTURE = 1;
+
     private static final int CAMERA_PIC_REQUEST = 1337;
     private static final int REQUEST_TAKE_PHOTO = 1;
-    Button send, salir;
+    Button send, salir, camera;
     Bitmap thumbnail;
     File pic;
     EditText address, subject, emailtext;
@@ -39,20 +41,21 @@ public class MailActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail);
-        send = (Button) findViewById(R.id.emailsendbutton);
-        address = (EditText) findViewById(R.id.emailaddress);
-        subject = (EditText) findViewById(R.id.emailsubject);
-        emailtext = (EditText) findViewById(R.id.emailtext);
-        salir= (Button) findViewById((R.id.btnsalir));
+        send = findViewById(R.id.emailsendbutton);
+        address = findViewById(R.id.emailaddress);
+        subject = findViewById(R.id.emailsubject);
+        emailtext = findViewById(R.id.emailtext);
+        salir=  findViewById((R.id.btnsalir));
 
-        Button camera = (Button) findViewById(R.id.btncamara);
+        camera = findViewById(R.id.btncamara);
+
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (cameraIntent.resolveActivity(getPackageManager()) != null){
                     // Crea el fichero donde va la foto
-                    File photoFile = null;
+                    File photoFile ;
                     photoFile = createImageFile();
                     // Solo continua si el fichero se ha creado bien
                     if (photoFile != null) {
@@ -62,6 +65,7 @@ public class MailActivity extends Activity {
                         startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
                     }
                 }
+                //si no vuelve a pedir foto
                 startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
             }
         });
@@ -69,9 +73,19 @@ public class MailActivity extends Activity {
         salir.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), LoggedActivity.class);
-                startActivity(intent);
-                finish();
+                //si esta logueado vuelve a la loggedActivity
+                SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
+                boolean sesion = preferences.getBoolean("sesion", false);
+                if (sesion){ Intent intent = new Intent(getApplicationContext(), LoggedActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    //si no, vuelve a la pantalla de registro y login
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
             }
         });
 
@@ -79,7 +93,7 @@ public class MailActivity extends Activity {
             @Override
             public void onClick(View arg0) {
                 try {
-                    // si no has scado foto
+                    // si no se ha sacado foto
                     if (!(pic == null)){
                    // mail = address.getText().toString();
                         mail ="lavin@numismaticalavin.com";
@@ -96,8 +110,7 @@ public class MailActivity extends Activity {
                     i.putExtra(Intent.EXTRA_STREAM, imageUri);
                     i.setType("image/png");
                     startActivity(Intent.createChooser(i, "Compartir"));
-                   }else{
-
+                   }else{//envia un mail
                     String uriText =
                             "mailto:lavin@numismaticalavin.com" +
                                     "?subject=" + Uri.encode("Asunto...") +
@@ -125,12 +138,10 @@ public class MailActivity extends Activity {
         if (requestCode == CAMERA_PIC_REQUEST && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();            
             thumbnail = (Bitmap) extras.get("data");
-            ImageView image = (ImageView) findViewById(R.id.imageView1);
+            ImageView image = findViewById(R.id.imageView1);
             image.setImageBitmap(thumbnail);
-
            /* Toast.makeText(getApplicationContext(), "FOTO",
                     Toast.LENGTH_LONG).show();*/
-
             try {
                 //File root = Environment.getExternalStorageDirectory();
                 File root = getExternalFilesDir(Environment.DIRECTORY_PICTURES);

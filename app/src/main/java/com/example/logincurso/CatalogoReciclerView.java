@@ -61,7 +61,7 @@ public class CatalogoReciclerView extends AppCompatActivity {
                 startActivity(i);
                 return true;
             case R.id.tumoneda:
-                Toast.makeText(this, "Tu moneda", Toast.LENGTH_LONG ).show();
+                Toast.makeText(this, getString(R.string.tu_moneda_menu), Toast.LENGTH_LONG ).show();
                 i = new Intent(getApplicationContext(),MailActivity.class);
                 startActivity(i);
                 return true;
