@@ -7,9 +7,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -19,6 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.logincurso.POJOS.Lote;
 import com.example.logincurso.adapters.AdapterLotes;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,9 +65,31 @@ public class CatalogoReciclerView extends AppCompatActivity {
                 startActivity(i);
                 return true;
             case R.id.tumoneda:
-                Toast.makeText(this, getString(R.string.tu_moneda_menu), Toast.LENGTH_LONG ).show();
-                i = new Intent(getApplicationContext(),MailActivity.class);
-                startActivity(i);
+                //para que el snackbar salga arriba FrameLayout.LayoutParams
+                String enviaFoto=getString(R.string.instruccionesMailFoto);
+                //creo el snack, con el texto deseado
+                Snackbar snack = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), enviaFoto, Snackbar.LENGTH_INDEFINITE);
+                //obtengo el textView del snack
+                TextView snckBarTxt = snack.getView().findViewById(com.google.android.material.R.id.snackbar_text); //si cambia la version gradle, hay que revisar esto
+                //para que ocupe el espacio que necesite
+                snckBarTxt.setSingleLine(false);
+                //Obtengo la vista
+                View view = snack.getView();
+                //parametros de la vista del snack
+                FrameLayout.LayoutParams params =(FrameLayout.LayoutParams)view.getLayoutParams();
+                //arriba
+                params.gravity = Gravity.TOP;
+                //params.height=340; //altura, pero si se pone setSingleLine no hace falta pq se ajusta a las lineas del texto
+                view.setLayoutParams(params);
+                snack
+                        .setAction("Ok", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent i = new Intent(getApplicationContext(), MailActivity.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        }).show();
                 return true;
             case R.id.musica:
                // Toast.makeText(this, "Musica", Toast.LENGTH_LONG ).show();
