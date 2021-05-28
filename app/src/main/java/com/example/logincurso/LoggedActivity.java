@@ -53,7 +53,7 @@ public class LoggedActivity extends AppCompatActivity {
                 return true;
             case R.id.tumoneda:
                 //para que el snackbar salga arriba FrameLayout.LayoutParams
-                String enviaFoto="Enviar una foto. \nPara enviar foto pulsa en Cámara, \nsaca la foto, acepta,y después modifica \nel Asunto y \nel Cuerpo del mensaje";
+                String enviaFoto=getString(R.string.instruccionesMailFoto);
                 //creo el snack, con el texto deseado
                 Snackbar snack = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), enviaFoto, Snackbar.LENGTH_INDEFINITE);
                 //obtengo el textView del snack

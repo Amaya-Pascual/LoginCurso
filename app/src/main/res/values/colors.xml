@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="cerrarSesionColor">#E49690</color>
     <color name="primaryColor">#48968E</color>
+    <color name="contrasenacolor">#C7A8A6</color>
 </resources>

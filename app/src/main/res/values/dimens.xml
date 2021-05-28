@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="custom_min_width">16dp</dimen>
+    <dimen name="custom_max_width">20dp</dimen>
+    <dimen name="textotamanio">20sp</dimen>
 </resources>

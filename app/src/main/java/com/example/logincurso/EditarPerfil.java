@@ -42,7 +42,6 @@ public class EditarPerfil extends AppCompatActivity {
     EditText etContrasena, etNombre, etApellido;
     Button btnEditar, btnVolverLogin, btnMostrar;
     TextView txtMail;
-    Usuario usuario;
 
     //menu
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -110,17 +109,20 @@ public class EditarPerfil extends AppCompatActivity {
         btnEditar = findViewById(R.id.btnEditar);
         btnMostrar = findViewById(R.id.btnMostrar);
         btnVolverLogin = findViewById(R.id.btnVolverLogin);
+
         SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
         String mail = preferences.getString("mail", "usuario");
-        //toma el mail de las preferencias
+        String contrasenaSinCod= preferences.getString("contrasena",etContrasena.getText().toString());
+
         txtMail.setText(mail);
+        etContrasena.setText(contrasenaSinCod);
+
+        mostrar();
 
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editar(); //edita el valor, y lo muestra
-                //ocultamos el boton porque ya está editado
-               // btnEditar.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -145,22 +147,26 @@ public class EditarPerfil extends AppCompatActivity {
     }
 
     private void mostrar() {
+        SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
+        String contrasenaSinCod= preferences.getString("contrasena",etContrasena.getText().toString());
+
         StringRequest stringRequest;
         stringRequest = new StringRequest(Request.Method.POST, URL_MOSTRAR,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                             Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
+                        if(response.equals("ERROR 1")) {
+                            Toast.makeText(EditarPerfil.this, getString(R.string.error_campos_vacios), Toast.LENGTH_SHORT).show();}
+                             //Toast.makeText(getApplicationContext(),response,Toast.LENGTH_LONG).show();
                         try {
-                            JSONArray array = new JSONArray(response);
-                            for (int i = 0; i < array.length(); i++) {
-                                //Toast.makeText(getApplicationContext(), i+"",Toast.LENGTH_SHORT).show();
-                                JSONObject usuario = array.getJSONObject(i);
-                                usuario.getString("nomCliente");
-                                usuario.getString("ape1Cliente");
-                                usuario.getString("mail");
-
-                            }
+                            JSONObject jsonjObject = new JSONObject(response);
+                            String nomCliente = jsonjObject.getString("nomCliente");
+                            String ape1Cliente = jsonjObject.getString("ape1Cliente");
+                            String mail = jsonjObject.getString("mail");
+                            etNombre.setText(nomCliente);
+                            etApellido.setText(ape1Cliente);
+                            etContrasena.setText(contrasenaSinCod);
+                            //Toast.makeText(getApplicationContext(),nomCliente,Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -172,7 +178,7 @@ public class EditarPerfil extends AppCompatActivity {
                 // En caso de tener algun error en la obtencion de los datos
                 Toast.makeText(EditarPerfil.this, getString(R.string.error_conexion), Toast.LENGTH_LONG).show();
             }
-        })/*{
+        }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 // En este metodo se hace el envio de valores de la aplicacion al servidor
@@ -183,7 +189,7 @@ public class EditarPerfil extends AppCompatActivity {
                 parametros.put("ape1Cliente", etApellido.getText().toString().trim());
                 return parametros;
             }
-        }*/;
+        };
         RequestQueue requestQueue = Volley.newRequestQueue(EditarPerfil.this);
         requestQueue.add(stringRequest);
     }
@@ -208,11 +214,6 @@ public class EditarPerfil extends AppCompatActivity {
                             i.putExtra("contras", etContrasena.getText().toString().trim());
                             i.putExtra("nom", etNombre.getText().toString().trim());
                             i.putExtra("ape", etApellido.getText().toString().trim());
-
-                            //coloca los valores en cada campo en la presentacion de la edicion del perfil
-                            etContrasena.setText(etContrasena.getText().toString().trim());
-                            etNombre.setText(etNombre.getText().toString().trim());
-                            etApellido.setText(etApellido.getText().toString().trim());
                             //lanza la activity
 
                             startActivity(i);
