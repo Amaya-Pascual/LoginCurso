@@ -1,10 +1,12 @@
 package com.example.logincurso;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -13,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.Switch;
+import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,15 +27,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.logincurso.POJOS.Lote;
-import com.example.logincurso.POJOS.Usuario;
 import com.google.android.material.snackbar.Snackbar;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -42,6 +42,9 @@ public class EditarPerfil extends AppCompatActivity {
     EditText etContrasena, etNombre, etApellido;
     Button btnEditar, btnVolverLogin, btnMostrar;
     TextView txtMail;
+    TextView txtprueba;
+
+    Switch switchModo;
 
     //menu
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -109,6 +112,8 @@ public class EditarPerfil extends AppCompatActivity {
         btnEditar = findViewById(R.id.btnEditar);
         btnMostrar = findViewById(R.id.btnMostrar);
         btnVolverLogin = findViewById(R.id.btnVolverLogin);
+        switchModo = findViewById(R.id.switchmodocolor);
+        txtprueba=findViewById(R.id.prueba);
 
         SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
         String mail = preferences.getString("mail", "usuario");
@@ -118,6 +123,24 @@ public class EditarPerfil extends AppCompatActivity {
         etContrasena.setText(contrasenaSinCod);
 
         mostrar();
+
+        switchModo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.getId()==R.id.switchmodocolor){
+                    boolean check= switchModo.isChecked();
+                    if(check){
+                        txtprueba.setText("checked");
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+
+                        }else {
+                        txtprueba.setText("not checked");
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    }
+                    }
+                }
+
+        });
 
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,7 +185,7 @@ public class EditarPerfil extends AppCompatActivity {
                             JSONObject jsonjObject = new JSONObject(response);
                             String nomCliente = jsonjObject.getString("nomCliente");
                             String ape1Cliente = jsonjObject.getString("ape1Cliente");
-                            String mail = jsonjObject.getString("mail");
+                            //String mail = jsonjObject.getString("mail");
                             etNombre.setText(nomCliente);
                             etApellido.setText(ape1Cliente);
                             etContrasena.setText(contrasenaSinCod);
@@ -180,9 +203,9 @@ public class EditarPerfil extends AppCompatActivity {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 // En este metodo se hace el envio de valores de la aplicacion al servidor
-                Map<String, String> parametros = new Hashtable<String, String>();
+                Map<String, String> parametros = new Hashtable<>();
                 parametros.put("mail", txtMail.getText().toString().trim());
                 parametros.put("contrasena", etContrasena.getText().toString().trim());
                 parametros.put("nomCliente", etNombre.getText().toString().trim());
@@ -227,9 +250,9 @@ public class EditarPerfil extends AppCompatActivity {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 // En este metodo se hace el envio de valores de la aplicacion al servidor
-                Map<String, String> parametros = new Hashtable<String, String>();
+                Map<String, String> parametros = new Hashtable<>();
                 parametros.put("mail", txtMail.getText().toString().trim());
                 parametros.put("contrasena", etContrasena.getText().toString().trim());
                 parametros.put("nomCliente", etNombre.getText().toString().trim());
@@ -240,5 +263,7 @@ public class EditarPerfil extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(EditarPerfil.this);
         requestQueue.add(stringRequest);
     }
+
+
     }
 

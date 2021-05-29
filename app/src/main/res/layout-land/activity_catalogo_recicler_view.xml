@@ -12,8 +12,8 @@
     tools:context=".CatalogoReciclerView">
 
     <TextView
-        android:layout_width="700dp"
-        android:layout_height="wrap_content"
+        android:layout_width="705dp"
+        android:layout_height="16dp"
         android:fontFamily="@font/akaya_kanadaka_regular"
         android:gravity="center"
         android:text="@string/catalogo"
@@ -21,8 +21,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerId"
-        android:layout_width="match_parent"
-        android:layout_height="315dp"
+        android:layout_width="703dp"
+        android:layout_height="364dp"
         android:padding="10dp"
         android:scrollbars="vertical" />
 
