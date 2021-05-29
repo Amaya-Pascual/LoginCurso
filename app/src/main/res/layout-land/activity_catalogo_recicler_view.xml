@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+<LinearLayout
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:orientation="vertical"
+    tools:context=".CatalogoReciclerView">
+
+    <TextView
+        android:layout_width="700dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/akaya_kanadaka_regular"
+        android:gravity="center"
+        android:text="@string/catalogo"
+        android:textSize="30sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerId"
+        android:layout_width="match_parent"
+        android:layout_height="315dp"
+        android:padding="10dp"
+        android:scrollbars="vertical" />
+
+
+</LinearLayout>
+</ScrollView>

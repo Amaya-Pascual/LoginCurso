@@ -4,7 +4,8 @@
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
     <style name="Theme.LoginCurso.EditTextStyle" parent="Widget.AppCompat.EditText">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/akaya_kanadaka_regular</item>
     </style>
 
 </resources>
