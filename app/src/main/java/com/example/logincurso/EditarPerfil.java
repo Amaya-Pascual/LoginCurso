@@ -42,7 +42,7 @@ public class EditarPerfil extends AppCompatActivity {
     EditText etContrasena, etNombre, etApellido;
     Button btnEditar, btnVolverLogin, btnMostrar;
     TextView txtMail;
-    TextView txtprueba;
+
 
     Switch switchModo;
 
@@ -113,7 +113,7 @@ public class EditarPerfil extends AppCompatActivity {
         btnMostrar = findViewById(R.id.btnMostrar);
         btnVolverLogin = findViewById(R.id.btnVolverLogin);
         switchModo = findViewById(R.id.switchmodocolor);
-        txtprueba=findViewById(R.id.prueba);
+
 
         SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
         String mail = preferences.getString("mail", "usuario");
@@ -123,18 +123,18 @@ public class EditarPerfil extends AppCompatActivity {
         etContrasena.setText(contrasenaSinCod);
 
         mostrar();
-
+        //elegir modo oscuro o día
         switchModo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(v.getId()==R.id.switchmodocolor){
                     boolean check= switchModo.isChecked();
                     if(check){
-                        txtprueba.setText("checked");
+
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
 
                         }else {
-                        txtprueba.setText("not checked");
+
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     }
                     }
