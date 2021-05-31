@@ -1,29 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="15dp"
+    tools:context=".MainActivity"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <RelativeLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/infCorporativa"
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:padding="15dp"
-        tools:context=".MainActivity">
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/akaya_kanadaka_regular"
+        android:gravity="center_horizontal"
+        android:text="@string/bienvenido"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
-
-        <TextView
-            android:id="@+id/infCorporativa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:fontFamily="@font/akaya_kanadaka_regular"
-            android:text="@string/bienvenido"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-        <Button
+    <Button
             android:id="@+id/btncamara"
+            android:background="@color/purple_500"
             android:layout_width="238dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/infCorporativa"
@@ -31,15 +29,16 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/akaya_kanadaka_regular"
             android:text="@string/camara"/>
+
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="151dp"
-            android:layout_height="113dp"
+            android:layout_width="215dp"
+            android:layout_height="165dp"
             android:layout_below="@+id/btncamara"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:contentDescription="@string/bienvenido"
             android:clickable="true"
+            android:contentDescription="@string/bienvenido"
             android:focusable="true"
             android:foregroundGravity="center_horizontal"
             app:srcCompat="@drawable/logowordpress" />
@@ -69,12 +68,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="8dp"
-            android:fontFamily="@font/akaya_kanadaka_regular"
             android:autofillHints="@string/clasifica_mi_moneda"
             android:backgroundTint="@android:color/darker_gray"
             android:ems="10"
+            android:fontFamily="@font/akaya_kanadaka_regular"
             android:hint="@string/clasifica_mi_moneda"
-            />
+            android:inputType="textEmailSubject" />
+
         <EditText
             android:id="@+id/emailtext"
             android:layout_width="324dp"
@@ -84,15 +84,16 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="8dp"
-            android:fontFamily="@font/akaya_kanadaka_regular"
             android:autofillHints="@string/clasifica_mi_moneda"
             android:backgroundTint="@android:color/darker_gray"
             android:ems="10"
+            android:fontFamily="@font/akaya_kanadaka_regular"
             android:hint="@string/clasifica_mi_moneda"
-            />
+            android:inputType="text|textMultiLine" />
 
         <Button
             android:id="@+id/emailsendbutton"
+            android:background="@color/purple_500"
             android:layout_width="243dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/emailtext"
@@ -103,6 +104,7 @@
 
         <Button
             android:id="@+id/btnsalir"
+            android:background="@color/purple_500"
             android:layout_width="238dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/emailsendbutton"
@@ -111,8 +113,14 @@
             android:fontFamily="@font/akaya_kanadaka_regular"
             android:text="@string/salida"/>
 
+    <include
+        android:id="@+id/includemail"
+        android:visibility="visible"
+        layout="@layout/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnsalir" />
 
 
-    </RelativeLayout>
+</RelativeLayout>
 
-</ScrollView>

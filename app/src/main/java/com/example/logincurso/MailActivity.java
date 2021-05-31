@@ -43,7 +43,8 @@ public class MailActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mail0);
+
+        setContentView(R.layout.activity_mail);
         send = findViewById(R.id.emailsendbutton);
         address = findViewById(R.id.emailaddress);
         subject = findViewById(R.id.emailsubject);
@@ -64,88 +65,79 @@ public class MailActivity extends Activity {
             startActivity(i);
         });
 
-        camera.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (cameraIntent.resolveActivity(getPackageManager()) != null){
-                    // Crea el fichero donde va la foto
-                    File photoFile ;
-                    photoFile = createImageFile();
-                    // Solo continua si el fichero se ha creado bien
-                    if (photoFile != null) {
-                        Uri photoURI = FileProvider.getUriForFile(MailActivity.this,
-                                "com.example.android.fileprovider", photoFile);
-                        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                        startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
-                    }
+        camera.setOnClickListener(arg0 -> {
+            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            if (cameraIntent.resolveActivity(getPackageManager()) != null){
+                // Crea el fichero donde va la foto
+                File photoFile ;
+                photoFile = createImageFile();
+                // Solo continua si el fichero se ha creado bien
+                if (photoFile != null) {
+                    Uri photoURI = FileProvider.getUriForFile(MailActivity.this,
+                            "com.example.android.fileprovider", photoFile);
+                    cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    startActivityForResult(cameraIntent, REQUEST_TAKE_PHOTO);
                 }
-                //si no vuelve a pedir foto
-                startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
             }
+            //si no vuelve a pedir foto
+            startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
         });
 
-        salir.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //si esta logueado vuelve a la loggedActivity
-                SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
-                boolean sesion = preferences.getBoolean("sesion", false);
-                if (sesion){ Intent intent = new Intent(getApplicationContext(), LoggedActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else{
-                    //si no, vuelve a la pantalla de registro y login
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-
+        salir.setOnClickListener(v -> {
+            //si esta logueado vuelve a la loggedActivity
+            SharedPreferences preferences = getSharedPreferences("loginPreferencia", Context.MODE_PRIVATE);
+            boolean sesion = preferences.getBoolean("sesion", false);
+            if (sesion){ Intent intent = new Intent(getApplicationContext(), LoggedActivity.class);
+                startActivity(intent);
+                finish();
+            }else{
+                //si no, vuelve a la pantalla de registro y login
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
             }
+
         });
 
-        send.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                try {
-                    // si no se ha sacado foto
-                    if (!(pic == null)){
-                  // mail = address.getText().toString();
-                        mail ="numislav@gmail.com";
-                    asunto = subject.getText().toString();
-                    mensaje = emailtext.getText().toString();
-                    Intent i = new Intent(Intent.ACTION_SEND);
-                    i.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
-                    i.putExtra(Intent.EXTRA_SUBJECT, asunto);
-                    i.putExtra(android.content.Intent.EXTRA_TEXT, mensaje);
-                    Uri imageUri = FileProvider.getUriForFile(
-                            MailActivity.this,
-                            "com.example.logincurso.provider", //(use your app signature + ".provider" )
-                            pic);
-                    i.putExtra(Intent.EXTRA_STREAM, imageUri);
-                    i.setType("image/png");
-                    startActivity(Intent.createChooser(i, "Compartir"));
-                   }else{//envia un mail
-                    String uriText =
-                            "mailto:lavin@numismaticalavin.com" +
-                                    "?subject=" + Uri.encode("Asunto...") +
-                                    "&body=" + Uri.encode("Cuerpo del mensaje...");
+        send.setOnClickListener(arg0 -> {
+            try {
+                // si no se ha sacado foto
+                if (!(pic == null)){
+              // mail = address.getText().toString();
+                    mail ="numislav@gmail.com";
+                asunto = subject.getText().toString();
+                mensaje = emailtext.getText().toString();
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.putExtra(Intent.EXTRA_EMAIL, new String[]{mail});
+                i.putExtra(Intent.EXTRA_SUBJECT, asunto);
+                i.putExtra(Intent.EXTRA_TEXT, mensaje);
+                Uri imageUri = FileProvider.getUriForFile(
+                        MailActivity.this,
+                        "com.example.logincurso.provider", //(use your app signature + ".provider" )
+                        pic);
+                i.putExtra(Intent.EXTRA_STREAM, imageUri);
+                i.setType("image/png");
+                startActivity(Intent.createChooser(i, "Compartir"));
+               }else{//envia un mail
+                String uriText =
+                        "mailto:lavin@numismaticalavin.com" +
+                                "?subject=" + Uri.encode("Asunto...") +
+                                "&body=" + Uri.encode("Cuerpo del mensaje...");
 
-                    Uri uri = Uri.parse(uriText);
-                    Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
-                    sendIntent.setData(uri);
-                        try {
-                            startActivity(Intent.createChooser(sendIntent, getString(R.string.enviarMail)));
-                        } catch (ActivityNotFoundException e)
-                        {
-                            Toast.makeText(MailActivity.this, R.string.errorMail, Toast.LENGTH_LONG).show();
-                        }}
+                Uri uri = Uri.parse(uriText);
+                Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
+                sendIntent.setData(uri);
+                    try {
+                        startActivity(Intent.createChooser(sendIntent, getString(R.string.enviarMail)));
+                    } catch (ActivityNotFoundException e)
+                    {
+                        Toast.makeText(MailActivity.this, R.string.errorMail, Toast.LENGTH_LONG).show();
+                    }}
 
 
-                }catch (Throwable t){
-                    Toast.makeText(getApplicationContext(), t.toString(),
-                            Toast.LENGTH_LONG).show();
-                }
+            }catch (Throwable t){
+                Toast.makeText(getApplicationContext(), t.toString(),
+                        Toast.LENGTH_LONG).show();
             }
         });
     }
