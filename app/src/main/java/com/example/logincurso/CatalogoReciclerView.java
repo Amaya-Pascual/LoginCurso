@@ -130,8 +130,9 @@ public class CatalogoReciclerView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //System.out.println("has hecho click");
+                String texto ="Has hecho click";
                 Toast.makeText(getApplicationContext(),
-                        "texto",
+                        texto,
                         Toast.LENGTH_SHORT).show();
             }
         });

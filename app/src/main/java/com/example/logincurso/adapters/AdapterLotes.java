@@ -52,7 +52,7 @@ public class AdapterLotes
                 .into(holder.imgFoto);
         holder.txtrefLote.setText("Lote número: "+lote.getRefLote());
         holder.txtdescripcion.setText(""+lote.getDescripcion());
-        holder.txtsalida.setText("Precio de salida: "+lote.getSalida());
+        holder.txtsalida.setText("Precio de salida: "+lote.getSalida()+" €");
 
         //click largo en la foto, muestra ventana de dialogo con descripcion
         holder.imgFoto.setOnLongClickListener(new View.OnLongClickListener() {
@@ -70,7 +70,8 @@ public class AdapterLotes
                 });
                 AlertDialog mostrarFoto = builder.create();
                 mostrarFoto.setTitle("LOTE: "+ lote.getRefLote());
-                mostrarFoto.setMessage(lote.getDescripcion());
+                mostrarFoto.setMessage(lote.getDescripcion() + " " + lote.getSalida()+"0 €");
+
                 //mostrarFoto.setView(vistaFoto);
                 mostrarFoto.show();
                 //Toast.makeText(mCtx.getApplicationContext(), listLotes.get(position).getDescripcion(),Toast.LENGTH_LONG).show();

@@ -26,7 +26,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:scrollbars="vertical" />
+            android:contextClickable="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:scrollbars="vertical" >
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <include
+                layout="@layout/bottom_nav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
 
 
     </LinearLayout>

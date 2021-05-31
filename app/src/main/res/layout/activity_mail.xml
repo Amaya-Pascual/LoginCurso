@@ -41,12 +41,12 @@
         <ImageView
             android:id="@+id/imageView1"
             android:layout_width="match_parent"
-            android:layout_height="236dp"
-            android:padding="25dp"
+            android:layout_height="209dp"
             android:adjustViewBounds="false"
             android:contentDescription="@string/logoTransparente"
             android:cropToPadding="true"
             android:foregroundGravity="center_horizontal"
+            android:padding="25dp"
             app:srcCompat="@drawable/logowordpress"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="50dp" />
@@ -114,7 +114,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
+            <include
+                layout="@layout/bottom_nav"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
