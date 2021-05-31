@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".MailActivity">
+
 
     <LinearLayout
         android:id="@+id/linearLayout0"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="385dp"
+        android:layout_height="696dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -58,8 +56,8 @@
             android:layout_height="wrap_content"
             android:autofillHints="Direccion de mail"
             android:fontFamily="@font/akaya_kanadaka_regular"
-            android:inputType="textEmailAddress"
             android:hint="@string/numislav_gmail_com"
+            android:inputType="textEmailAddress"
             android:textSize="25sp" />
 
 
@@ -68,9 +66,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints="Subject"
-            android:inputType="textEmailSubject"
             android:fontFamily="@font/akaya_kanadaka_regular"
             android:hint="@string/clasifica_mi_moneda"
+            android:inputType="textEmailSubject"
             android:textSize="25sp" />
 
 
@@ -80,8 +78,8 @@
             android:layout_height="wrap_content"
             android:autofillHints="Contenido"
             android:fontFamily="@font/akaya_kanadaka_regular"
-            android:inputType="textEmailSubject"
             android:hint="@string/cuerpo_del_mensaje"
+            android:inputType="textEmailSubject"
             android:textSize="25sp" />
 
         <Button
@@ -114,18 +112,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
-            <include
-                layout="@layout/bottom_nav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-        </LinearLayout>
+        <include
+            layout="@layout/bottom_nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>

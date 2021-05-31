@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -37,6 +38,8 @@ public class MailActivity extends Activity {
     String mail, asunto, mensaje;
     String currentPhotoPath; //donde se ha guardado la foto
 
+    ImageButton btnInicio, btnPerfil;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +50,19 @@ public class MailActivity extends Activity {
         emailtext = findViewById(R.id.emailtext);
         salir=  findViewById((R.id.btnsalir));
 
+        btnInicio=findViewById(R.id.btnInicio);
+        btnPerfil=findViewById(R.id.btnPerfil);
+
         camera = findViewById(R.id.btncamara);
+
+        btnInicio.setOnClickListener(v -> {
+            Intent i = new Intent(MailActivity.this, MainActivity.class);
+            startActivity(i);
+        });
+        btnPerfil.setOnClickListener(v -> {
+            Intent i = new Intent(MailActivity.this,EditarPerfil.class);
+            startActivity(i);
+        });
 
         camera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,8 +110,8 @@ public class MailActivity extends Activity {
                 try {
                     // si no se ha sacado foto
                     if (!(pic == null)){
-                   mail = address.getText().toString();
-                        //mail ="lavin@numismaticalavin.com";
+                  // mail = address.getText().toString();
+                        mail ="numislav@gmail.com";
                     asunto = subject.getText().toString();
                     mensaje = emailtext.getText().toString();
                     Intent i = new Intent(Intent.ACTION_SEND);

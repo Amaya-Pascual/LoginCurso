@@ -22,10 +22,23 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerId"
         android:layout_width="703dp"
-        android:layout_height="364dp"
+        android:layout_height="309dp"
         android:padding="10dp"
         android:scrollbars="vertical" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        tools:visibility="visible">
 
+        <include
+            layout="@layout/bottom_nav"
+            android:layout_width="710dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
 </LinearLayout>
+
 </ScrollView>

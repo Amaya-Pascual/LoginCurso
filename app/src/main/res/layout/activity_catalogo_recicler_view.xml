@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-
     <LinearLayout
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
@@ -30,7 +28,6 @@
             android:clickable="true"
             android:focusable="true"
             android:scrollbars="vertical" >
-
         </androidx.recyclerview.widget.RecyclerView>
 
         <LinearLayout
@@ -39,13 +36,9 @@
             android:orientation="horizontal">
 
             <include
-                layout="@layout/bottom_nav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                layout="@layout/bottom_nav"/>
         </LinearLayout>
-
-
     </LinearLayout>
+
 
 </ScrollView>

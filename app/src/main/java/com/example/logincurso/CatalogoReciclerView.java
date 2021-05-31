@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class CatalogoReciclerView extends AppCompatActivity {
     ArrayList<Lote> listLotes;
     //declarar el recycler view
     RecyclerView recycler;
+    ImageButton btnInicio, btnPerfil;
 
     //menu
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -120,6 +122,8 @@ public class CatalogoReciclerView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catalogo_recicler_view);
         recycler=findViewById(R.id.recyclerId);
+        btnInicio=findViewById(R.id.btnInicio);
+        btnPerfil=findViewById(R.id.btnPerfil);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         //recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
         //recycler.setLayoutManager(new GridLayoutManager(this,3));
@@ -137,6 +141,15 @@ public class CatalogoReciclerView extends AppCompatActivity {
             }
         });
         recycler.setAdapter(adapterLotes);
+
+        btnInicio.setOnClickListener(v -> {
+            Intent i = new Intent(CatalogoReciclerView.this, MainActivity.class);
+            startActivity(i);
+        });
+        btnPerfil.setOnClickListener(v -> {
+            Intent i = new Intent(CatalogoReciclerView.this,EditarPerfil.class);
+            startActivity(i);
+        });
     }
     //musica
     protected void onResume() {
