@@ -1,128 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MailActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        tools:context=".MainActivity">
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout0"
-        android:layout_width="385dp"
-        android:layout_height="696dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/btncamara"
+        <TextView
+            android:id="@+id/infCorporativa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_alignParentTop="true"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/akaya_kanadaka_regular"
-            android:padding="15dp"
-            android:text="@string/camara"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
+            android:text="@string/bienvenido"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        <Button
+            android:id="@+id/btncamara"
+            android:layout_width="238dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/infCorporativa"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/akaya_kanadaka_regular"
+            android:text="@string/camara"/>
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="209dp"
-            android:adjustViewBounds="false"
-            android:contentDescription="@string/logoTransparente"
-            android:cropToPadding="true"
+            android:layout_width="151dp"
+            android:layout_height="113dp"
+            android:layout_below="@+id/btncamara"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:contentDescription="@string/bienvenido"
+            android:clickable="true"
+            android:focusable="true"
             android:foregroundGravity="center_horizontal"
-            android:padding="25dp"
-            app:srcCompat="@drawable/logowordpress"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="50dp" />
-
+            app:srcCompat="@drawable/logowordpress" />
 
         <EditText
             android:id="@+id/emailaddress"
-            android:layout_width="match_parent"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:autofillHints="Direccion de mail"
+            android:layout_below="@+id/imageView1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/akaya_kanadaka_regular"
+            android:autofillHints="@string/numislav_gmail_com"
+            android:backgroundTint="@android:color/darker_gray"
+            android:ems="10"
             android:hint="@string/numislav_gmail_com"
-            android:inputType="textEmailAddress"
-            android:textSize="25sp" />
-
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/emailsubject"
-            android:layout_width="match_parent"
+            android:layout_width="324dp"
             android:layout_height="wrap_content"
-            android:autofillHints="Subject"
+            android:layout_below="@id/emailaddress"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/akaya_kanadaka_regular"
+            android:autofillHints="@string/clasifica_mi_moneda"
+            android:backgroundTint="@android:color/darker_gray"
+            android:ems="10"
             android:hint="@string/clasifica_mi_moneda"
-            android:inputType="textEmailSubject"
-            android:textSize="25sp" />
-
-
+            />
         <EditText
             android:id="@+id/emailtext"
-            android:layout_width="match_parent"
+            android:layout_width="324dp"
             android:layout_height="wrap_content"
-            android:autofillHints="Contenido"
+            android:layout_below="@id/emailsubject"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/akaya_kanadaka_regular"
-            android:hint="@string/cuerpo_del_mensaje"
-            android:inputType="textEmailSubject"
-            android:textSize="25sp" />
+            android:autofillHints="@string/clasifica_mi_moneda"
+            android:backgroundTint="@android:color/darker_gray"
+            android:ems="10"
+            android:hint="@string/clasifica_mi_moneda"
+            />
 
         <Button
             android:id="@+id/emailsendbutton"
-            android:layout_width="match_parent"
+            android:layout_width="243dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_below="@id/emailtext"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
             android:fontFamily="@font/akaya_kanadaka_regular"
-            android:gravity="center"
-            android:text="@string/enviarFoto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:text="@string/enviar_mail"/>
 
         <Button
             android:id="@+id/btnsalir"
-            android:layout_width="match_parent"
+            android:layout_width="238dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_below="@id/emailsendbutton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/akaya_kanadaka_regular"
-            android:gravity="center"
-            android:text="@string/salirDeFoto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:text="@string/salida"/>
 
 
-        <include
-            layout="@layout/bottom_nav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

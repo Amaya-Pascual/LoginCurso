@@ -43,7 +43,7 @@ public class MailActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mail);
+        setContentView(R.layout.activity_mail0);
         send = findViewById(R.id.emailsendbutton);
         address = findViewById(R.id.emailaddress);
         subject = findViewById(R.id.emailsubject);
