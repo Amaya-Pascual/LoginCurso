@@ -95,8 +95,8 @@ public class MailActivity extends Activity {
                 try {
                     // si no se ha sacado foto
                     if (!(pic == null)){
-                   // mail = address.getText().toString();
-                        mail ="lavin@numismaticalavin.com";
+                   mail = address.getText().toString();
+                        //mail ="lavin@numismaticalavin.com";
                     asunto = subject.getText().toString();
                     mensaje = emailtext.getText().toString();
                     Intent i = new Intent(Intent.ACTION_SEND);

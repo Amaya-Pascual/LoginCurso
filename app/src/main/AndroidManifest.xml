@@ -19,14 +19,14 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_lavin"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_lavin_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginCurso"
         android:usesCleartextTraffic="true"
         android:fullBackupContent="true">
-        <activity android:name=".MailActivity"></activity>
+        <activity android:name=".MailActivity"/>
         <activity android:name=".ObtenerPerfil" />
         <activity android:name=".EditarPerfil" />
         <activity android:name=".CatalogoReciclerView" />
@@ -65,7 +65,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths"/>
         </provider>
     </application>
 

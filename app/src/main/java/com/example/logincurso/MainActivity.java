@@ -108,7 +108,8 @@ public class MainActivity extends AppCompatActivity {
                 //para que el snackbar salga arriba FrameLayout.LayoutParams
                 String enviaFoto=getString(R.string.instruccionesMailFoto);
                 //creo el snack, con el texto deseado
-                Snackbar snack = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), enviaFoto, Snackbar.LENGTH_INDEFINITE);
+               Snackbar snack = Snackbar.make(getWindow().getDecorView().findViewById(android.R.id.content), enviaFoto, Snackbar.LENGTH_LONG);
+
                 //obtengo el textView del snack
                 TextView snckBarTxt = snack.getView().findViewById(com.google.android.material.R.id.snackbar_text); //si cambia la version gradle, hay que revisar esto
                 //para que ocupe el espacio que necesite
@@ -139,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String email = null, contras = null;
+        String email, contras;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         password=findViewById(R.id.password);
@@ -240,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> parametros = new HashMap<>();
                 parametros.put("mail", usuario);
                 parametros.put("contrasena", passw);

@@ -69,5 +69,6 @@
     <string name="clasifica_tu_moneda">Clasifica tu moneda</string>
     <string name="instruccionesMailFoto">Enviar una foto. \nPara enviar foto pulsa en Cámara, \nsaca la foto, acepta,y después modifica \nel Asunto y \nel Cuerpo del mensaje</string>
     <string name="btnMostrar">Mostrar</string>
+    <string name="modo_oscuro">Modo Oscuro</string>
 
 </resources>

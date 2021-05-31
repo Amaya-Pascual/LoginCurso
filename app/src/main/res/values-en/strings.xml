@@ -66,4 +66,6 @@
     <string name="tu_moneda_menu">Your coin</string>
     <string name="clasifica_tu_moneda">Clasification</string>
     <string name="instruccionesMailFoto">Sending photo. Click on Camera,  take your photo, accept, write your subject and message</string>
+    <string name="btnMostrar">Show</string>
+    <string name="modo_oscuro">Dark Theme</string>
 </resources>

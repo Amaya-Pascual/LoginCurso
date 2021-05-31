@@ -13,7 +13,7 @@
 
     <TextView
         android:layout_width="705dp"
-        android:layout_height="16dp"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/akaya_kanadaka_regular"
         android:gravity="center"
         android:text="@string/catalogo"

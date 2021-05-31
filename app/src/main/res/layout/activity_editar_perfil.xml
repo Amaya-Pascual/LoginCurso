@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -69,7 +70,6 @@
                   android:id="@+id/etContrasena"
                   android:layout_width="match_parent"
                   android:layout_height="match_parent">
-
               </EditText>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -143,24 +143,11 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 
         <Button
-            android:id="@+id/btnMostrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="92dp"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/akaya_kanadaka_regular"
-            android:text="@string/btnMostrar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
-
-        <Button
             android:id="@+id/btnVolverLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="160dp"
+            android:layout_marginTop="108dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/akaya_kanadaka_regular"
             android:text="@string/btnVolverLogin"
@@ -173,14 +160,15 @@
             android:id="@+id/switchmodocolor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Modo Oscuro "
-            android:onClick="onClick"
+            android:text="@string/modo_oscuro"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnVolverLogin"
-            app:layout_constraintVertical_bias="0.774" />
+            app:layout_constraintVertical_bias="0.774"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

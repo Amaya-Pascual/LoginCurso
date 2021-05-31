@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Switch;
@@ -110,7 +111,7 @@ public class EditarPerfil extends AppCompatActivity {
         etNombre = findViewById(R.id.etNombre);
         etApellido = findViewById(R.id.etApellido);
         btnEditar = findViewById(R.id.btnEditar);
-        btnMostrar = findViewById(R.id.btnMostrar);
+
         btnVolverLogin = findViewById(R.id.btnVolverLogin);
         switchModo = findViewById(R.id.switchmodocolor);
 
@@ -121,40 +122,25 @@ public class EditarPerfil extends AppCompatActivity {
 
         txtMail.setText(mail);
         etContrasena.setText(contrasenaSinCod);
-
         mostrar();
+
         //elegir modo oscuro o día
-        switchModo.setOnClickListener(new View.OnClickListener() {
+        switchModo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if(v.getId()==R.id.switchmodocolor){
-                    boolean check= switchModo.isChecked();
-                    if(check){
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+              if (isChecked) {
+                  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+              } else {
+                  AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+              }
 
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-
-                        }else {
-
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                    }
-                    }
-                }
-
+            }
         });
 
         btnEditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editar(); //edita el valor, y lo muestra
-            }
-        });
-
-        btnMostrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mostrar(); //muestra lo que hay en la base de datos
-                //ocultamos el boton porque ya está editado
-                //btnMostrar.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -237,8 +223,7 @@ public class EditarPerfil extends AppCompatActivity {
                             i.putExtra("contras", etContrasena.getText().toString().trim());
                             i.putExtra("nom", etNombre.getText().toString().trim());
                             i.putExtra("ape", etApellido.getText().toString().trim());
-                            //lanza la activity
-
+                            //lanza la activity principal por si ha cambiado la clave para que se loguee otra vez
                             startActivity(i);
                         }
                     }
