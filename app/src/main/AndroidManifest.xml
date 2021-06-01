@@ -11,9 +11,14 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <!--escritura en el dispositivo -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="18"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- telefono -->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!-- camara -->
+    <uses-permission android:name="android.permission.CAMERA"/>
 
 
 

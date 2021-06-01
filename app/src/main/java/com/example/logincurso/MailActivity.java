@@ -1,33 +1,43 @@
 package com.example.logincurso;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+import static android.Manifest.permission.CAMERA;
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 public class MailActivity extends Activity {
+
 
     private static final int CAMERA_PIC_REQUEST = 1337;
     private static final int REQUEST_TAKE_PHOTO = 1;
@@ -39,6 +49,8 @@ public class MailActivity extends Activity {
     String currentPhotoPath; //donde se ha guardado la foto
 
     ImageButton btnInicio, btnPerfil;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +67,12 @@ public class MailActivity extends Activity {
         btnPerfil=findViewById(R.id.btnPerfil);
 
         camera = findViewById(R.id.btncamara);
+
+        if(validaPermisos()){
+            camera.setEnabled(true);
+        }else{
+            camera.setEnabled(false);
+        }
 
         btnInicio.setOnClickListener(v -> {
             Intent i = new Intent(MailActivity.this, MainActivity.class);
@@ -141,6 +159,86 @@ public class MailActivity extends Activity {
             }
         });
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode==100){
+            if(grantResults.length==2 && grantResults[0]==PackageManager.PERMISSION_GRANTED
+                    && grantResults[1]==PackageManager.PERMISSION_GRANTED){
+                camera.setEnabled(true);
+            }else{
+                solicitarPermisosManual();
+            }
+        }
+
+    }
+
+    private void solicitarPermisosManual() {
+        final CharSequence[] opciones={"si","no"};
+        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(MailActivity.this);
+        alertOpciones.setTitle("¿Está seguro de aceptar los permisos?");
+        alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (opciones[i].equals("si")){
+                    Intent intent=new Intent();
+                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri=Uri.fromParts("package",getPackageName(),null);
+                    intent.setData(uri);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(),"Los permisos fueron aceptados",Toast.LENGTH_SHORT).show();
+                    camera.setEnabled(true);
+                    dialogInterface.dismiss();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Los permisos no fueron aceptados",Toast.LENGTH_SHORT).show();
+                    cargarDialogoRecomendacion();
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+        alertOpciones.show();
+    }
+
+    private boolean validaPermisos() {
+   /*    if(Build.VERSION.SDK_INT>23){
+            return true;
+        }*/
+        int permisoCamara =ContextCompat.checkSelfPermission(MailActivity.this, CAMERA);
+        int permisoEscritura = checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permisolectura = ContextCompat.checkSelfPermission(MailActivity.this, READ_EXTERNAL_STORAGE);
+
+        if((checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED) && (checkSelfPermission(android.Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED)){
+            return true;
+        }
+
+        if((ActivityCompat.shouldShowRequestPermissionRationale(MailActivity.this,CAMERA)) ||
+                (ActivityCompat.shouldShowRequestPermissionRationale(MailActivity.this,WRITE_EXTERNAL_STORAGE))){
+            cargarDialogoRecomendacion();
+        }else{
+            requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,CAMERA},100);
+        }
+
+        return false;
+
+    }
+
+    private void cargarDialogoRecomendacion() {
+        AlertDialog.Builder dialogo=new AlertDialog.Builder(MailActivity.this);
+        dialogo.setTitle("Permisos Desactivados");
+        dialogo.setMessage("Debe aceptar los permisos para el correcto funcionamiento de la App");
+
+        dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                requestPermissions(new String[]{WRITE_EXTERNAL_STORAGE,CAMERA},100);
+            }
+        });
+        dialogo.show();
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAMERA_PIC_REQUEST && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();            

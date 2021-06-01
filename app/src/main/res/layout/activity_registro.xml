@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".Registro">
@@ -15,12 +15,12 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="false"
         android:alpha="0.05"
+        android:contentDescription="@string/logoTransparente"
         android:cropToPadding="false"
         android:foregroundGravity="center"
-        android:contentDescription="@string/logoTransparente"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:srcCompat="@drawable/logowordpress"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="50dp" />
+        tools:layout_editor_absoluteX="16dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
