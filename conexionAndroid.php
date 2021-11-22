@@ -10,7 +10,7 @@
 	$host_name = 'localhost';
   	$database = 'lavin';
   	$user_name = 'lavin';
-  	$password = '4C9O659vRAk7';
+  	$password = '*******';
   	$pdo = null;
 	
 
